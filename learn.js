@@ -191,7 +191,7 @@
     const filterBtns = document.querySelectorAll("[data-course-filter]");
     if (!grid) return;
 
-    // Sync HTML progress from localStorage if available
+    // Sync course progress from localStorage if available
     try {
       const raw = localStorage.getItem("vexdyn-learn-html");
       if (raw) {
@@ -202,6 +202,19 @@
         if (htmlC) {
           htmlC.progress = pct;
           htmlC.status = pct === 0 ? "not-started" : pct >= 100 ? "completed" : "in-progress";
+        }
+      }
+    } catch {}
+    try {
+      const rawCss = localStorage.getItem("vexdyn-learn-css");
+      if (rawCss) {
+        const data = JSON.parse(rawCss);
+        const done = Array.isArray(data.completed) ? data.completed.length : 0;
+        const pct = Math.round((done / 24) * 100);
+        const cssC = COURSES.find((c) => c.id === "css");
+        if (cssC) {
+          cssC.progress = pct;
+          cssC.status = pct === 0 ? "not-started" : pct >= 100 ? "completed" : "in-progress";
         }
       }
     } catch {}
@@ -234,8 +247,8 @@
       const cta = e.target.closest("[data-course-cta]");
       if (!cta) return;
       const id = cta.getAttribute("data-id");
-      // HTML course is handled by html-course.js
-      if (id === "html") return;
+      // HTML / CSS courses handled by dedicated course scripts
+      if (id === "html" || id === "css") return;
       const notice = document.getElementById("courseNotice");
       if (notice) {
         notice.hidden = false;

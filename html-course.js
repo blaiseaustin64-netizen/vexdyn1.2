@@ -282,9 +282,13 @@
     const catalog = document.getElementById("learnCatalog");
     const courseView = document.getElementById("htmlCourseView");
     const lessonView = document.getElementById("htmlLessonView");
+    const cssCourse = document.getElementById("cssCourseView");
+    const cssLesson = document.getElementById("cssLessonView");
     if (catalog) catalog.hidden = name !== "catalog";
     if (courseView) courseView.hidden = name !== "course";
     if (lessonView) lessonView.hidden = name !== "lesson";
+    if (cssCourse) cssCourse.hidden = true;
+    if (cssLesson) cssLesson.hidden = true;
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 

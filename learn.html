@@ -174,7 +174,77 @@
       </section>
     </div>
 
-  </main>
+  
+    <!-- CSS COURSE VIEW -->
+    <div id="cssCourseView" class="course-view" hidden>
+      <section class="section course-view-header">
+        <button type="button" class="btn btn-secondary course-back" data-css-back-catalog>← All Courses</button>
+        <div class="course-view-brand">
+          <span class="course-view-tech" style="color:#1572b6">CSS</span>
+          <h1 class="course-view-title">CSS Design System</h1>
+          <p class="course-view-sub">24 lessons · Transform structure into visual experience</p>
+        </div>
+        <div class="course-view-progress">
+          <div class="course-view-pct" id="cssCoursePct">0%</div>
+          <div class="course-progress-bar course-view-bar"><div class="course-progress-fill" id="cssCourseBar" style="width:0%;background:#1572b6"></div></div>
+          <div class="course-view-status" id="cssCourseStatus">NOT STARTED</div>
+        </div>
+        <div id="cssCompleteBanner" class="course-complete-banner" style="background:rgba(21,114,182,0.12);border-color:rgba(21,114,182,0.35);color:#1572b6" hidden>
+          CSS SYSTEM INITIALIZED · 100%
+          <span style="display:block;font-weight:500;margin-top:4px;font-size:0.85rem;opacity:0.9">You can now transform structure into visual experiences. Next system: JAVASCRIPT</span>
+        </div>
+      </section>
+      <section class="section" style="padding-top:0">
+        <h2 class="section-title" style="font-size:1.25rem;margin-bottom:18px">Lessons</h2>
+        <div class="lesson-list" id="cssLessonList"></div>
+      </section>
+    </div>
+
+    <!-- CSS LESSON VIEW -->
+    <div id="cssLessonView" class="lesson-view" hidden>
+      <section class="section lesson-view-inner">
+        <button type="button" class="btn btn-secondary course-back" data-css-back-course>← Lesson List</button>
+        <div class="lesson-header">
+          <span class="lesson-num" id="cssLessonNum" style="color:#1572b6">LESSON 01</span>
+          <h1 class="lesson-title" id="cssLessonTitle"></h1>
+          <p class="lesson-mission" id="cssLessonMission"></p>
+        </div>
+        <div class="lesson-block">
+          <h3 class="lesson-block-title">Definitions</h3>
+          <div id="cssLessonDefs"></div>
+        </div>
+        <div class="lesson-block">
+          <h3 class="lesson-block-title">How It Works</h3>
+          <p class="lesson-challenge" id="cssLessonExplanation" style="background:var(--bg-elevated);border-color:var(--border)"></p>
+        </div>
+        <div class="lesson-block">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px">
+            <h3 class="lesson-block-title" style="margin:0" id="cssExampleTitle">Example</h3>
+            <button type="button" class="btn btn-secondary" id="cssCopyBtn" style="padding:6px 12px;font-size:0.72rem;letter-spacing:0.06em">COPY</button>
+          </div>
+          <pre class="lesson-code"><code id="cssLessonExample"></code></pre>
+        </div>
+        <div class="lesson-block">
+          <h3 class="lesson-block-title">Breakdown</h3>
+          <p class="lesson-challenge" id="cssLessonBreakdown" style="background:var(--bg-elevated);border-color:var(--border);white-space:pre-line"></p>
+        </div>
+        <div class="lesson-block">
+          <h3 class="lesson-block-title">VEXDYN Application</h3>
+          <p class="lesson-challenge" id="cssLessonApplication" style="background:rgba(21,114,182,0.08);border-color:rgba(21,114,182,0.22)"></p>
+        </div>
+        <div class="lesson-block">
+          <h3 class="lesson-block-title">Challenge</h3>
+          <p class="lesson-challenge" id="cssLessonChallenge"></p>
+        </div>
+        <div class="lesson-actions">
+          <button type="button" class="btn btn-secondary" id="cssLessonPrevBtn" data-css-goto="0">← Previous</button>
+          <button type="button" class="btn btn-primary" id="cssLessonCompleteBtn">MARK LESSON COMPLETE</button>
+          <button type="button" class="btn btn-secondary" id="cssLessonNextBtn" data-css-goto="0">Next →</button>
+        </div>
+      </section>
+    </div>
+
+</main>
 
   <footer class="site-footer">
     <div class="footer-inner">
@@ -217,5 +287,6 @@
   <script src="script.js"></script>
   <script src="learn.js"></script>
   <script src="html-course.js"></script>
+  <script src="css-course.js"></script>
 </body>
 </html>
