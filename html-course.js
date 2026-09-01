@@ -312,14 +312,17 @@
 
     list.innerHTML = LESSONS.map((lesson) => {
       const done = isComplete(lesson.id, completed);
+      const badge = done
+        ? '<span class="lesson-badge lesson-badge-done"><span class="lesson-badge-icon" aria-hidden="true">✓</span> COMPLETE</span>'
+        : '<span class="lesson-badge lesson-badge-open">OPEN</span>';
       return `
-        <button type="button" class="lesson-item ${done ? "is-complete" : ""}" data-open-lesson="${lesson.id}">
-          <span class="lesson-item-num">${String(lesson.id).padStart(2, "0")}</span>
-          <span class="lesson-item-body">
-            <span class="lesson-item-title">${escapeHtml(lesson.title)}</span>
-            <span class="lesson-item-mission">${escapeHtml(lesson.mission)}</span>
+        <button type="button" class="lesson-item ${done ? "is-complete" : ""}" data-open-lesson="${lesson.id}" aria-label="Lesson ${lesson.id}: ${escapeHtml(lesson.title)}">
+          <span class="lesson-item-top">
+            <span class="lesson-item-num">${String(lesson.id).padStart(2, "0")}</span>
+            ${badge}
           </span>
-          <span class="lesson-item-state">${done ? "COMPLETE" : "OPEN"}</span>
+          <span class="lesson-item-title">${escapeHtml(lesson.title)}</span>
+          <span class="lesson-item-mission">${escapeHtml(lesson.mission)}</span>
         </button>`;
     }).join("");
   }
@@ -363,6 +366,12 @@
     if (nextBtn) {
       nextBtn.disabled = lesson.id >= LESSONS.length;
       nextBtn.dataset.goto = String(lesson.id + 1);
+    }
+
+    // Subtle unique ambient identity per lesson (same structure, different glow)
+    const lessonView = document.getElementById("htmlLessonView");
+    if (lessonView) {
+      lessonView.setAttribute("data-lesson-ambient", String(((lesson.id - 1) % 8) + 1));
     }
 
     showView("lesson");

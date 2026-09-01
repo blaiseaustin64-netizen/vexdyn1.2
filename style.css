@@ -2225,64 +2225,187 @@ ul, ol { list-style: none; }
 .lesson-list {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
 }
+
+/* Lesson cards — must override global button { background:none; border:none } */
+button.lesson-item,
 .lesson-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 14px;
-  width: 100%;
-  text-align: left;
-  padding: 16px 16px;
-  background: var(--bg-card);
-  border: 1px solid var(--border-metal);
-  border-radius: var(--radius-md);
-  color: var(--text-primary);
-  cursor: pointer;
-  transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  gap: 8px !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  text-align: left !important;
+  padding: 18px 18px 16px !important;
+  margin: 0 !important;
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border-metal) !important;
+  border-radius: var(--radius-lg) !important;
+  color: var(--text-primary) !important;
+  cursor: pointer !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  box-shadow: var(--shadow) !important;
+  transition: border-color 0.28s ease, transform 0.28s ease, box-shadow 0.28s ease !important;
+  font-family: inherit !important;
+  appearance: none !important;
+  -webkit-appearance: none !important;
 }
+button.lesson-item:hover,
 .lesson-item:hover {
-  border-color: rgba(227, 79, 38, 0.45);
-  transform: translateY(-1px);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  border-color: color-mix(in srgb, var(--accent) 55%, var(--border-strong)) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: var(--shadow-lg), 0 0 24px var(--accent-soft) !important;
 }
+button.lesson-item:active,
+.lesson-item:active {
+  transform: translateY(0) scale(0.995) !important;
+}
+button.lesson-item:focus-visible,
+.lesson-item:focus-visible {
+  outline: 2px solid var(--accent) !important;
+  outline-offset: 2px !important;
+}
+button.lesson-item.is-complete,
 .lesson-item.is-complete {
-  border-color: rgba(227, 79, 38, 0.3);
+  border-color: color-mix(in srgb, var(--accent) 35%, var(--border-metal)) !important;
+}
+
+.lesson-item-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
 }
 .lesson-item-num {
-  font-size: 0.8rem;
+  display: block;
+  font-size: 0.78rem;
   font-weight: 700;
-  color: #e34f26;
-  min-width: 1.8em;
-  padding-top: 2px;
-}
-.lesson-item-body {
-  flex: 1;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+  flex-shrink: 0;
 }
 .lesson-item-title {
-  font-size: 0.95rem;
-  font-weight: 650;
+  display: block;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  line-height: 1.3;
+  color: var(--text-primary);
 }
 .lesson-item-mission {
-  font-size: 0.82rem;
+  display: block;
+  font-size: 0.86rem;
   color: var(--text-secondary);
-  line-height: 1.45;
+  line-height: 1.5;
 }
-.lesson-item-state {
-  font-size: 0.68rem;
-  font-weight: 650;
+
+/* Status badges — pills, not plain text */
+.lesson-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.65rem;
+  font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--text-muted);
+  line-height: 1.2;
   white-space: nowrap;
-  padding-top: 3px;
+  border: 1px solid transparent;
 }
-.lesson-item.is-complete .lesson-item-state {
-  color: #e34f26;
+.lesson-badge-open {
+  background: var(--bg-elevated);
+  color: var(--text-muted);
+  border-color: var(--border);
+}
+.lesson-badge-done {
+  background: var(--accent-soft);
+  color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 35%, transparent);
+}
+.lesson-badge-icon {
+  font-size: 0.72rem;
+  line-height: 1;
+}
+
+/* Theme polish — Aurora needs stronger glass contrast */
+[data-theme="aurora"] button.lesson-item,
+[data-theme="aurora"] .lesson-item {
+  background: rgba(255, 255, 255, 0.72) !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06) !important;
+}
+[data-theme="aurora"] button.lesson-item:hover,
+[data-theme="aurora"] .lesson-item:hover {
+  border-color: color-mix(in srgb, var(--accent) 40%, rgba(0,0,0,0.12)) !important;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.1), 0 0 20px var(--accent-soft) !important;
+}
+[data-theme="ice"] button.lesson-item,
+[data-theme="ice"] .lesson-item {
+  border-color: color-mix(in srgb, var(--accent) 25%, var(--border-metal)) !important;
+}
+[data-theme="ice"] button.lesson-item:hover,
+[data-theme="ice"] .lesson-item:hover {
+  box-shadow: var(--shadow-lg), 0 0 28px rgba(56, 189, 248, 0.18) !important;
+}
+
+/* Subtle per-lesson ambient identity on lesson page */
+.lesson-view {
+  position: relative;
+}
+.lesson-view::before {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.55;
+  transition: background 0.5s ease;
+}
+.lesson-view > * { position: relative; z-index: 1; }
+.lesson-view[data-lesson-ambient="1"]::before {
+  background: radial-gradient(ellipse 60% 40% at 15% 10%, var(--accent-soft), transparent 70%);
+}
+.lesson-view[data-lesson-ambient="2"]::before {
+  background: radial-gradient(ellipse 55% 38% at 85% 12%, var(--accent-soft), transparent 70%);
+}
+.lesson-view[data-lesson-ambient="3"]::before {
+  background: radial-gradient(ellipse 50% 42% at 50% 18%, var(--accent-soft), transparent 72%);
+}
+.lesson-view[data-lesson-ambient="4"]::before {
+  background: radial-gradient(ellipse 58% 36% at 80% 70%, var(--accent-soft), transparent 70%);
+}
+.lesson-view[data-lesson-ambient="5"]::before {
+  background: radial-gradient(ellipse 52% 40% at 20% 75%, var(--accent-soft), transparent 70%);
+}
+.lesson-view[data-lesson-ambient="6"]::before {
+  background: radial-gradient(ellipse 48% 44% at 70% 40%, var(--accent-soft), transparent 72%);
+}
+.lesson-view[data-lesson-ambient="7"]::before {
+  background: radial-gradient(ellipse 56% 34% at 30% 50%, var(--accent-soft), transparent 70%);
+}
+.lesson-view[data-lesson-ambient="8"]::before {
+  background: radial-gradient(ellipse 60% 38% at 55% 85%, var(--accent-soft), transparent 70%);
+}
+
+@media (max-width: 600px) {
+  button.lesson-item,
+  .lesson-item {
+    padding: 16px 14px 14px !important;
+  }
+  .lesson-item-title {
+    font-size: 0.95rem;
+  }
+  .lesson-item-mission {
+    font-size: 0.82rem;
+  }
 }
 
 /* Lesson detail */
@@ -2379,13 +2502,6 @@ ul, ol { list-style: none; }
   min-width: 120px;
 }
 @media (max-width: 600px) {
-  .lesson-item {
-    flex-wrap: wrap;
-  }
-  .lesson-item-state {
-    width: 100%;
-    padding-left: calc(1.8em + 14px);
-  }
   .lesson-actions .btn {
     width: 100%;
   }
