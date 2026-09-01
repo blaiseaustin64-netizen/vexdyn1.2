@@ -624,17 +624,43 @@
     }
   }
 
+  function openCssCourse() {
+    try {
+      renderCourseList();
+      showView("course");
+    } catch (err) {
+      console.error("VEXDYN CSS course open failed:", err);
+    }
+  }
+
   function initCssCourse() {
-    if (!document.getElementById("cssCourseView")) return;
+    if (!document.getElementById("cssCourseView")) {
+      console.warn("VEXDYN: cssCourseView not found");
+      return;
+    }
 
     syncCatalogProgress();
 
     document.addEventListener("click", (e) => {
-      const openCourse = e.target.closest('[data-course-cta][data-id="css"]');
-      if (openCourse) {
+      // Open CSS course from CTA button OR course card
+      const cta = e.target.closest("[data-course-cta]");
+      const card = e.target.closest('[data-course-id="css"]');
+      const id = cta ? cta.getAttribute("data-id") : null;
+      if ((cta && id === "css") || (card && !e.target.closest("[data-course-cta]") && false)) {
+        // only CTA opens course (card body clicks ignored unless on CTA)
+      }
+      if (cta && id === "css") {
         e.preventDefault();
-        renderCourseList();
-        showView("course");
+        e.stopPropagation();
+        openCssCourse();
+        return;
+      }
+      // Also support explicit data attribute on any element
+      const openBtn = e.target.closest("[data-open-css-course]");
+      if (openBtn) {
+        e.preventDefault();
+        e.stopPropagation();
+        openCssCourse();
         return;
       }
 
@@ -689,6 +715,9 @@
   }
 
   document.addEventListener("DOMContentLoaded", initCssCourse);
+  document.addEventListener("vexdyn-open-css-course", function () {
+    if (typeof openCssCourse === "function") openCssCourse();
+  });
 
-  window.VEXDYN_CSS_COURSE = { LESSONS, loadProgress, getPercent };
+  window.VEXDYN_CSS_COURSE = { LESSONS, loadProgress, getPercent, renderCourseList, openCssCourse };
 })();

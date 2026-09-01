@@ -488,5 +488,5 @@
 
   document.addEventListener("DOMContentLoaded", initHtmlCourse);
 
-  window.VEXDYN_HTML_COURSE = { LESSONS, loadProgress, getPercent };
+  window.VEXDYN_HTML_COURSE = { LESSONS, loadProgress, getPercent, renderCourseList };
 })();

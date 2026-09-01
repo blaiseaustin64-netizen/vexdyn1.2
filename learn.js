@@ -247,12 +247,57 @@
       const cta = e.target.closest("[data-course-cta]");
       if (!cta) return;
       const id = cta.getAttribute("data-id");
-      // HTML / CSS courses handled by dedicated course scripts
-      if (id === "html" || id === "css") return;
+      // Fallback openers if dedicated scripts missed the event
+      if (id === "css") {
+        e.preventDefault();
+        const catalog = document.getElementById("learnCatalog");
+        const cssCourse = document.getElementById("cssCourseView");
+        const cssLesson = document.getElementById("cssLessonView");
+        const htmlCourse = document.getElementById("htmlCourseView");
+        const htmlLesson = document.getElementById("htmlLessonView");
+        if (catalog) catalog.hidden = true;
+        if (htmlCourse) htmlCourse.hidden = true;
+        if (htmlLesson) htmlLesson.hidden = true;
+        if (cssLesson) cssLesson.hidden = true;
+        if (cssCourse) {
+          cssCourse.hidden = false;
+          // Ask css-course.js to render list if available
+          if (window.VEXDYN_CSS_COURSE && typeof window.VEXDYN_CSS_COURSE.renderCourseList === "function") {
+            window.VEXDYN_CSS_COURSE.renderCourseList();
+          } else {
+            // dispatch a custom event the course script listens for
+            document.dispatchEvent(new CustomEvent("vexdyn-open-css-course"));
+          }
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+        return;
+      }
+      if (id === "html") {
+        e.preventDefault();
+        const catalog = document.getElementById("learnCatalog");
+        const htmlCourse = document.getElementById("htmlCourseView");
+        const htmlLesson = document.getElementById("htmlLessonView");
+        const cssCourse = document.getElementById("cssCourseView");
+        const cssLesson = document.getElementById("cssLessonView");
+        if (catalog) catalog.hidden = true;
+        if (cssCourse) cssCourse.hidden = true;
+        if (cssLesson) cssLesson.hidden = true;
+        if (htmlLesson) htmlLesson.hidden = true;
+        if (htmlCourse) {
+          htmlCourse.hidden = false;
+          if (window.VEXDYN_HTML_COURSE && typeof window.VEXDYN_HTML_COURSE.renderCourseList === "function") {
+            window.VEXDYN_HTML_COURSE.renderCourseList();
+          } else {
+            document.dispatchEvent(new CustomEvent("vexdyn-open-html-course"));
+          }
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+        return;
+      }
       const notice = document.getElementById("courseNotice");
       if (notice) {
         notice.hidden = false;
-        notice.textContent = "This course opens in a future build. HTML is available now.";
+        notice.textContent = "This course opens in a future build. HTML and CSS are available now.";
         setTimeout(() => { notice.hidden = true; }, 3200);
       }
     });
