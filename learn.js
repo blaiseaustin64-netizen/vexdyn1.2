@@ -233,6 +233,20 @@
       }
     } catch {}
 
+    try {
+      const rawReact = localStorage.getItem("vexdyn-learn-react");
+      if (rawReact) {
+        const data = JSON.parse(rawReact);
+        const done = Array.isArray(data.completed) ? data.completed.length : 0;
+        const pct = Math.round((done / 36) * 100);
+        const rC = COURSES.find((c) => c.id === "react");
+        if (rC) {
+          rC.progress = pct;
+          rC.status = pct === 0 ? "not-started" : pct >= 100 ? "completed" : "in-progress";
+        }
+      }
+    } catch {}
+
     updateJourney(COURSES);
     if (pathTrack) pathTrack.innerHTML = renderPath(COURSES);
     renderCourses(COURSES);
@@ -331,6 +345,10 @@
         if (cssCourse) cssCourse.hidden = true;
         if (cssLesson) cssLesson.hidden = true;
         if (jsLesson) jsLesson.hidden = true;
+        const reactCourse = document.getElementById("reactCourseView");
+        const reactLesson = document.getElementById("reactLessonView");
+        if (reactCourse) reactCourse.hidden = true;
+        if (reactLesson) reactLesson.hidden = true;
         if (jsCourse) {
           jsCourse.hidden = false;
           if (window.VEXDYN_JS_COURSE && typeof window.VEXDYN_JS_COURSE.renderCourseList === "function") {
@@ -344,10 +362,32 @@
         }
         return;
       }
+      if (id === "react") {
+        e.preventDefault();
+        const catalog = document.getElementById("learnCatalog");
+        ["htmlCourseView","htmlLessonView","cssCourseView","cssLessonView","jsCourseView","jsLessonView","reactLessonView"].forEach((vid) => {
+          const el = document.getElementById(vid);
+          if (el) el.hidden = true;
+        });
+        if (catalog) catalog.hidden = true;
+        const reactCourse = document.getElementById("reactCourseView");
+        if (reactCourse) {
+          reactCourse.hidden = false;
+          if (window.VEXDYN_REACT_COURSE && typeof window.VEXDYN_REACT_COURSE.renderCourseList === "function") {
+            window.VEXDYN_REACT_COURSE.renderCourseList();
+          } else if (window.VEXDYN_REACT_COURSE && typeof window.VEXDYN_REACT_COURSE.openReactCourse === "function") {
+            window.VEXDYN_REACT_COURSE.openReactCourse();
+          } else {
+            document.dispatchEvent(new CustomEvent("vexdyn-open-react-course"));
+          }
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+        return;
+      }
       const notice = document.getElementById("courseNotice");
       if (notice) {
         notice.hidden = false;
-        notice.textContent = "React opens in a future build. HTML, CSS, and JavaScript are available now.";
+        notice.textContent = "HTML, CSS, JavaScript, and React are available in VEXDYN Learn.";
         setTimeout(() => { notice.hidden = true; }, 3200);
       }
     });

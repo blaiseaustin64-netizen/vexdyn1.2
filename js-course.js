@@ -587,6 +587,10 @@
     if (cssLesson) cssLesson.hidden = true;
     if (jsCourse) jsCourse.hidden = name !== "course";
     if (jsLesson) jsLesson.hidden = name !== "lesson";
+    const reactCourse = document.getElementById("reactCourseView");
+    const reactLesson = document.getElementById("reactLessonView");
+    if (reactCourse) reactCourse.hidden = true;
+    if (reactLesson) reactLesson.hidden = true;
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 

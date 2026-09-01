@@ -2527,3 +2527,19 @@ button.lesson-item.is-complete,
 [data-theme="aurora"] #jsCourseView .lesson-badge-done {
   color: #8a7000;
 }
+
+
+/* React course accent */
+.react-code {
+  border-color: rgba(97, 218, 251, 0.4) !important;
+  box-shadow: 0 0 20px rgba(97, 218, 251, 0.1);
+}
+#reactCourseView .lesson-item:hover {
+  border-color: rgba(97, 218, 251, 0.55) !important;
+  box-shadow: var(--shadow-lg), 0 0 24px rgba(97, 218, 251, 0.18) !important;
+}
+#reactCourseView .lesson-badge-done {
+  color: #149ECA;
+  border-color: rgba(97, 218, 251, 0.4);
+  background: rgba(97, 218, 251, 0.12);
+}

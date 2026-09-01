@@ -458,6 +458,10 @@
     const jsLesson = document.getElementById("jsLessonView");
     if (jsCourse) jsCourse.hidden = true;
     if (jsLesson) jsLesson.hidden = true;
+    const reactCourse = document.getElementById("reactCourseView");
+    const reactLesson = document.getElementById("reactLessonView");
+    if (reactCourse) reactCourse.hidden = true;
+    if (reactLesson) reactLesson.hidden = true;
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 

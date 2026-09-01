@@ -314,6 +314,76 @@
       </section>
     </div>
 
+
+    <!-- REACT COURSE VIEW -->
+    <div id="reactCourseView" class="course-view" hidden>
+      <section class="section course-view-header">
+        <button type="button" class="btn btn-secondary course-back" data-react-back-catalog>← All Courses</button>
+        <div class="course-view-brand">
+          <span class="course-view-tech" style="color:#61DAFB">REACT</span>
+          <h1 class="course-view-title">React — Build Systems</h1>
+          <p class="course-view-sub">36 lessons · From components to production architecture</p>
+        </div>
+        <div class="course-view-progress">
+          <div class="course-view-pct" id="reactCoursePct">0%</div>
+          <div class="course-progress-bar course-view-bar"><div class="course-progress-fill" id="reactCourseBar" style="width:0%;background:#61DAFB"></div></div>
+          <div class="course-view-status" id="reactCourseStatus">NOT STARTED</div>
+        </div>
+        <div id="reactCompleteBanner" class="course-complete-banner" style="background:rgba(97,218,251,0.12);border-color:rgba(97,218,251,0.4);color:#149ECA" hidden>
+          REACT SYSTEM INITIALIZED · 100%
+          <span style="display:block;font-weight:500;margin-top:4px;font-size:0.85rem;opacity:0.9">You didn't just learn to code. You learned to build systems. VEXDYN LEARN COMPLETE.</span>
+        </div>
+      </section>
+      <section class="section" style="padding-top:0">
+        <h2 class="section-title" style="font-size:1.25rem;margin-bottom:18px">Lessons</h2>
+        <div class="lesson-list" id="reactLessonList"></div>
+      </section>
+    </div>
+
+    <!-- REACT LESSON VIEW -->
+    <div id="reactLessonView" class="lesson-view" hidden>
+      <section class="section lesson-view-inner">
+        <button type="button" class="btn btn-secondary course-back" data-react-back-course>← Lesson List</button>
+        <div class="lesson-header">
+          <span class="lesson-num" id="reactLessonNum" style="color:#61DAFB">LESSON 01</span>
+          <h1 class="lesson-title" id="reactLessonTitle"></h1>
+          <p class="lesson-mission" id="reactLessonMission"></p>
+        </div>
+        <div class="lesson-block">
+          <h3 class="lesson-block-title">Definitions</h3>
+          <div id="reactLessonDefs"></div>
+        </div>
+        <div class="lesson-block">
+          <h3 class="lesson-block-title">How It Works</h3>
+          <p class="lesson-challenge" id="reactLessonExplanation" style="background:var(--bg-elevated);border-color:var(--border)"></p>
+        </div>
+        <div class="lesson-block">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px">
+            <h3 class="lesson-block-title" style="margin:0">REACT / Example</h3>
+            <button type="button" class="btn btn-secondary" id="reactCopyBtn" style="padding:6px 12px;font-size:0.72rem;letter-spacing:0.06em">COPY</button>
+          </div>
+          <pre class="lesson-code react-code"><code id="reactLessonExample"></code></pre>
+        </div>
+        <div class="lesson-block">
+          <h3 class="lesson-block-title">Breakdown</h3>
+          <p class="lesson-challenge" id="reactLessonBreakdown" style="background:var(--bg-elevated);border-color:var(--border);white-space:pre-line"></p>
+        </div>
+        <div class="lesson-block">
+          <h3 class="lesson-block-title">VEXDYN Application</h3>
+          <p class="lesson-challenge" id="reactLessonApplication" style="background:rgba(97,218,251,0.08);border-color:rgba(97,218,251,0.25)"></p>
+        </div>
+        <div class="lesson-block">
+          <h3 class="lesson-block-title">Challenge</h3>
+          <p class="lesson-challenge" id="reactLessonChallenge"></p>
+        </div>
+        <div class="lesson-actions">
+          <button type="button" class="btn btn-secondary" id="reactLessonPrevBtn" data-react-goto="0">← Previous</button>
+          <button type="button" class="btn btn-primary" id="reactLessonCompleteBtn">MARK LESSON COMPLETE</button>
+          <button type="button" class="btn btn-secondary" id="reactLessonNextBtn" data-react-goto="0">Next →</button>
+        </div>
+      </section>
+    </div>
+
 </main>
 
   <footer class="site-footer">
@@ -359,5 +429,6 @@
   <script src="html-course.js"></script>
   <script src="css-course.js"></script>
   <script src="js-course.js"></script>
+  <script src="react-course.js"></script>
 </body>
 </html>
