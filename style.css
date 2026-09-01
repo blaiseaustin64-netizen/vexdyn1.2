@@ -2506,3 +2506,24 @@ button.lesson-item.is-complete,
     width: 100%;
   }
 }
+
+/* JavaScript course accent */
+.js-code {
+  border-color: rgba(247, 223, 30, 0.35) !important;
+  box-shadow: 0 0 20px rgba(247, 223, 30, 0.08);
+}
+[data-theme="aurora"] .js-code {
+  border-color: rgba(180, 140, 0, 0.35) !important;
+}
+#jsCourseView .lesson-item:hover {
+  border-color: rgba(247, 223, 30, 0.5) !important;
+  box-shadow: var(--shadow-lg), 0 0 24px rgba(247, 223, 30, 0.15) !important;
+}
+#jsCourseView .lesson-badge-done {
+  color: #c4a000;
+  border-color: rgba(247, 223, 30, 0.4);
+  background: rgba(247, 223, 30, 0.12);
+}
+[data-theme="aurora"] #jsCourseView .lesson-badge-done {
+  color: #8a7000;
+}

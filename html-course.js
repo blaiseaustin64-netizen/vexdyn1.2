@@ -289,6 +289,10 @@
     if (lessonView) lessonView.hidden = name !== "lesson";
     if (cssCourse) cssCourse.hidden = true;
     if (cssLesson) cssLesson.hidden = true;
+    const jsCourse = document.getElementById("jsCourseView");
+    const jsLesson = document.getElementById("jsLessonView");
+    if (jsCourse) jsCourse.hidden = true;
+    if (jsLesson) jsLesson.hidden = true;
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 

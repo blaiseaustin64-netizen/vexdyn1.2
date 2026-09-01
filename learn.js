@@ -219,6 +219,20 @@
       }
     } catch {}
 
+    try {
+      const rawJs = localStorage.getItem("vexdyn-learn-js");
+      if (rawJs) {
+        const data = JSON.parse(rawJs);
+        const done = Array.isArray(data.completed) ? data.completed.length : 0;
+        const pct = Math.round((done / 32) * 100);
+        const jsC = COURSES.find((c) => c.id === "javascript");
+        if (jsC) {
+          jsC.progress = pct;
+          jsC.status = pct === 0 ? "not-started" : pct >= 100 ? "completed" : "in-progress";
+        }
+      }
+    } catch {}
+
     updateJourney(COURSES);
     if (pathTrack) pathTrack.innerHTML = renderPath(COURSES);
     renderCourses(COURSES);
@@ -259,6 +273,10 @@
         if (htmlCourse) htmlCourse.hidden = true;
         if (htmlLesson) htmlLesson.hidden = true;
         if (cssLesson) cssLesson.hidden = true;
+        const jsCourse = document.getElementById("jsCourseView");
+        const jsLesson = document.getElementById("jsLessonView");
+        if (jsCourse) jsCourse.hidden = true;
+        if (jsLesson) jsLesson.hidden = true;
         if (cssCourse) {
           cssCourse.hidden = false;
           // Ask css-course.js to render list if available
@@ -279,9 +297,13 @@
         const htmlLesson = document.getElementById("htmlLessonView");
         const cssCourse = document.getElementById("cssCourseView");
         const cssLesson = document.getElementById("cssLessonView");
+        const jsCourse = document.getElementById("jsCourseView");
+        const jsLesson = document.getElementById("jsLessonView");
         if (catalog) catalog.hidden = true;
         if (cssCourse) cssCourse.hidden = true;
         if (cssLesson) cssLesson.hidden = true;
+        if (jsCourse) jsCourse.hidden = true;
+        if (jsLesson) jsLesson.hidden = true;
         if (htmlLesson) htmlLesson.hidden = true;
         if (htmlCourse) {
           htmlCourse.hidden = false;
@@ -294,10 +316,38 @@
         }
         return;
       }
+      if (id === "javascript") {
+        e.preventDefault();
+        const catalog = document.getElementById("learnCatalog");
+        const htmlCourse = document.getElementById("htmlCourseView");
+        const htmlLesson = document.getElementById("htmlLessonView");
+        const cssCourse = document.getElementById("cssCourseView");
+        const cssLesson = document.getElementById("cssLessonView");
+        const jsCourse = document.getElementById("jsCourseView");
+        const jsLesson = document.getElementById("jsLessonView");
+        if (catalog) catalog.hidden = true;
+        if (htmlCourse) htmlCourse.hidden = true;
+        if (htmlLesson) htmlLesson.hidden = true;
+        if (cssCourse) cssCourse.hidden = true;
+        if (cssLesson) cssLesson.hidden = true;
+        if (jsLesson) jsLesson.hidden = true;
+        if (jsCourse) {
+          jsCourse.hidden = false;
+          if (window.VEXDYN_JS_COURSE && typeof window.VEXDYN_JS_COURSE.renderCourseList === "function") {
+            window.VEXDYN_JS_COURSE.renderCourseList();
+          } else if (window.VEXDYN_JS_COURSE && typeof window.VEXDYN_JS_COURSE.openJsCourse === "function") {
+            window.VEXDYN_JS_COURSE.openJsCourse();
+          } else {
+            document.dispatchEvent(new CustomEvent("vexdyn-open-js-course"));
+          }
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+        return;
+      }
       const notice = document.getElementById("courseNotice");
       if (notice) {
         notice.hidden = false;
-        notice.textContent = "This course opens in a future build. HTML and CSS are available now.";
+        notice.textContent = "React opens in a future build. HTML, CSS, and JavaScript are available now.";
         setTimeout(() => { notice.hidden = true; }, 3200);
       }
     });

@@ -244,6 +244,76 @@
       </section>
     </div>
 
+
+    <!-- JAVASCRIPT COURSE VIEW -->
+    <div id="jsCourseView" class="course-view" hidden>
+      <section class="section course-view-header">
+        <button type="button" class="btn btn-secondary course-back" data-js-back-catalog>← All Courses</button>
+        <div class="course-view-brand">
+          <span class="course-view-tech" style="color:#f7df1e">JAVASCRIPT</span>
+          <h1 class="course-view-title">JavaScript — Power the Experience</h1>
+          <p class="course-view-sub">32 lessons · Turn interfaces into interactive systems</p>
+        </div>
+        <div class="course-view-progress">
+          <div class="course-view-pct" id="jsCoursePct">0%</div>
+          <div class="course-progress-bar course-view-bar"><div class="course-progress-fill" id="jsCourseBar" style="width:0%;background:#f7df1e"></div></div>
+          <div class="course-view-status" id="jsCourseStatus">NOT STARTED</div>
+        </div>
+        <div id="jsCompleteBanner" class="course-complete-banner" style="background:rgba(247,223,30,0.12);border-color:rgba(247,223,30,0.4);color:#c4a000" hidden>
+          JAVASCRIPT SYSTEM INITIALIZED · 100%
+          <span style="display:block;font-weight:500;margin-top:4px;font-size:0.85rem;opacity:0.9">You have learned how to turn interfaces into interactive systems. Next system: REACT</span>
+        </div>
+      </section>
+      <section class="section" style="padding-top:0">
+        <h2 class="section-title" style="font-size:1.25rem;margin-bottom:18px">Lessons</h2>
+        <div class="lesson-list" id="jsLessonList"></div>
+      </section>
+    </div>
+
+    <!-- JAVASCRIPT LESSON VIEW -->
+    <div id="jsLessonView" class="lesson-view" hidden>
+      <section class="section lesson-view-inner">
+        <button type="button" class="btn btn-secondary course-back" data-js-back-course>← Lesson List</button>
+        <div class="lesson-header">
+          <span class="lesson-num" id="jsLessonNum" style="color:#f7df1e">LESSON 01</span>
+          <h1 class="lesson-title" id="jsLessonTitle"></h1>
+          <p class="lesson-mission" id="jsLessonMission"></p>
+        </div>
+        <div class="lesson-block">
+          <h3 class="lesson-block-title">Definitions</h3>
+          <div id="jsLessonDefs"></div>
+        </div>
+        <div class="lesson-block">
+          <h3 class="lesson-block-title">How It Works</h3>
+          <p class="lesson-challenge" id="jsLessonExplanation" style="background:var(--bg-elevated);border-color:var(--border)"></p>
+        </div>
+        <div class="lesson-block">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px">
+            <h3 class="lesson-block-title" style="margin:0">JS / Example</h3>
+            <button type="button" class="btn btn-secondary" id="jsCopyBtn" style="padding:6px 12px;font-size:0.72rem;letter-spacing:0.06em">COPY</button>
+          </div>
+          <pre class="lesson-code js-code"><code id="jsLessonExample"></code></pre>
+        </div>
+        <div class="lesson-block">
+          <h3 class="lesson-block-title">Breakdown</h3>
+          <p class="lesson-challenge" id="jsLessonBreakdown" style="background:var(--bg-elevated);border-color:var(--border);white-space:pre-line"></p>
+        </div>
+        <div class="lesson-block">
+          <h3 class="lesson-block-title">VEXDYN Application</h3>
+          <p class="lesson-challenge" id="jsLessonApplication" style="background:rgba(247,223,30,0.08);border-color:rgba(247,223,30,0.25)"></p>
+        </div>
+        <div class="lesson-block">
+          <h3 class="lesson-block-title">Challenge</h3>
+          <p class="lesson-challenge" id="jsLessonChallenge"></p>
+        </div>
+        <div class="lesson-actions">
+          <button type="button" class="btn btn-secondary" id="jsLessonPrevBtn" data-js-goto="0">← Previous</button>
+          <button type="button" class="btn btn-primary" id="jsLessonCompleteBtn">MARK LESSON COMPLETE</button>
+          <button type="button" class="btn btn-secondary" id="jsLessonNextBtn" data-js-goto="0">Next →</button>
+        </div>
+      </section>
+    </div>
+
 </main>
 
   <footer class="site-footer">
@@ -288,5 +358,6 @@
   <script src="learn.js"></script>
   <script src="html-course.js"></script>
   <script src="css-course.js"></script>
+  <script src="js-course.js"></script>
 </body>
 </html>
