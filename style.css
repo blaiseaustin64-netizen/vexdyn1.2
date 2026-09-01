@@ -2543,3 +2543,127 @@ button.lesson-item.is-complete,
   border-color: rgba(97, 218, 251, 0.4);
   background: rgba(97, 218, 251, 0.12);
 }
+
+/* ========== LEARN ENTRY LOADER ========== */
+.learn-entry-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-primary, #0a0a0f);
+  transition: opacity 0.65s ease, visibility 0.65s ease;
+}
+.learn-entry-loader .learn-entry-wordmark {
+  width: min(280px, 70vw);
+  height: auto;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 1.4s cubic-bezier(0.16, 1, 0.3, 1), transform 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+  background: transparent !important;
+}
+.learn-entry-loader.is-visible .learn-entry-wordmark {
+  opacity: 1;
+  transform: translateY(0);
+}
+.learn-entry-loader.is-done {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+html.learn-entry-pending body {
+  overflow: hidden;
+}
+[data-theme="aurora"] .learn-entry-loader .learn-entry-wordmark {
+  filter: brightness(0) saturate(100%);
+  opacity: 0;
+}
+[data-theme="aurora"] .learn-entry-loader.is-visible .learn-entry-wordmark {
+  opacity: 0.88;
+}
+
+/* Learn hero wordmark */
+.learn-hero-wordmark {
+  display: block;
+  width: auto;
+  max-width: min(420px, 82vw);
+  height: auto;
+  margin: 0 auto 18px;
+  background: transparent !important;
+}
+@media (min-width: 900px) {
+  .learn-hero-wordmark {
+    max-width: min(520px, 48vw);
+  }
+}
+[data-theme="aurora"] .learn-hero-wordmark {
+  filter: brightness(0) saturate(100%);
+  opacity: 0.88;
+}
+
+/* Homepage footer contact buttons (not floating) */
+.footer-contact-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  max-width: var(--max-width);
+  margin: 0 auto 28px;
+  padding: 0 20px;
+}
+.footer-contact-btn {
+  min-width: 160px;
+  text-align: center;
+}
+
+/* Course-specific lesson list accents */
+#htmlCourseView .lesson-item-num { color: #e34f26 !important; }
+#htmlCourseView .lesson-item:hover {
+  border-color: rgba(227, 79, 38, 0.55) !important;
+  box-shadow: var(--shadow-lg), 0 0 24px rgba(227, 79, 38, 0.18) !important;
+}
+#htmlCourseView .lesson-badge-done {
+  color: #e34f26;
+  border-color: rgba(227, 79, 38, 0.4);
+  background: rgba(227, 79, 38, 0.12);
+}
+
+#cssCourseView .lesson-item-num { color: #1572b6 !important; }
+#cssCourseView .lesson-item:hover {
+  border-color: rgba(21, 114, 182, 0.55) !important;
+  box-shadow: var(--shadow-lg), 0 0 24px rgba(21, 114, 182, 0.18) !important;
+}
+#cssCourseView .lesson-badge-done {
+  color: #1572b6;
+  border-color: rgba(21, 114, 182, 0.4);
+  background: rgba(21, 114, 182, 0.12);
+}
+
+#jsCourseView .lesson-item-num { color: #f7df1e !important; }
+#jsCourseView .lesson-item:hover {
+  border-color: rgba(247, 223, 30, 0.5) !important;
+  box-shadow: var(--shadow-lg), 0 0 24px rgba(247, 223, 30, 0.15) !important;
+}
+
+#reactCourseView .lesson-item-num { color: #61dafb !important; }
+#reactCourseView .lesson-item:hover {
+  border-color: rgba(97, 218, 251, 0.55) !important;
+  box-shadow: var(--shadow-lg), 0 0 24px rgba(97, 218, 251, 0.18) !important;
+}
+
+/* Course identity chip on lesson pages */
+.lesson-course-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.lesson-course-chip svg {
+  width: 18px;
+  height: 18px;
+}

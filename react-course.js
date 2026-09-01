@@ -626,7 +626,12 @@
 
   function animatePercent(el, from, to) {
     if (!el) return;
-    const duration = 700;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      el.textContent = Math.round(to) + "%";
+      return;
+    }
+    const delta = Math.abs(to - from);
+    const duration = delta <= 10 ? 900 : delta <= 50 ? 1200 : 1500;
     const start = performance.now();
     function tick(now) {
       const t = Math.min(1, (now - start) / duration);
