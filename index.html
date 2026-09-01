@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="obsidian">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="VEXDYN — Technology, tools and knowledge for turning digital ideas into reality. Build what's next." />
+  <title>VEXDYN — Build What's Next</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- CINEMATIC INTRO -->
+  <div class="loader-overlay" id="loader" aria-hidden="true">
+    <div class="loader-stage">
+      <img src="vexdyn-symbol.png" alt="" class="loader-symbol" id="loaderSymbol" width="100" height="100" />
+      <div class="loader-sweep" id="loaderSweep"></div>
+      <img src="vexdyn-logo-wordmark.png" alt="VEXDYN" class="loader-lockup" id="loaderLockup" width="200" />
+      <div class="loader-system" id="loaderSystem">
+        <div class="loader-sys-label">VEXDYN</div>
+        <div class="loader-sys-msg" id="loaderSysMsg">SYSTEM INITIALIZING</div>
+        <div class="loader-progress"><div class="loader-progress-fill" id="loaderProgressFill"></div></div>
+      </div>
+      <div class="loader-final" id="loaderFinal">
+        <div class="loader-line" id="loaderLine1">THE NEXT</div>
+        <div class="loader-line" id="loaderLine2">BEGINS HERE.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEARCH OVERLAY -->
+  <div class="search-overlay" id="searchOverlay" role="dialog" aria-label="Search">
+    <div class="search-panel">
+      <div class="search-bar">
+        <input type="search" id="searchInput" placeholder="What are you looking for?" autocomplete="off" enterkeyhint="search" />
+        <button class="search-close" id="searchClose" aria-label="Close search">✕</button>
+      </div>
+      <div class="search-results" id="searchResults"></div>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="logo-link" aria-label="VEXDYN Home">
+        <img src="vexdyn-logo-wordmark-alpha.png" alt="VEXDYN" class="logo-swap" height="36" />
+      </a>
+      <nav class="nav-desktop" aria-label="Main">
+        <a href="index.html" class="active">Home</a>
+        <a href="websites.html">Websites</a>
+        <a href="learn.html">Learn</a>
+        <a href="plus.html">VEXDYN+</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <div class="header-actions">
+        <button class="cmd-btn" id="cmdBtn" aria-label="Search" title="Search">⌕</button>
+        <div class="theme-wrap">
+          <button class="theme-btn" id="themeBtn" aria-label="Change theme">🌙</button>
+          <div class="theme-panel" id="themePanel" role="menu">
+            <button class="theme-option active" data-theme="obsidian">🌙 Obsidian</button>
+            <button class="theme-option" data-theme="aurora">☀️ Aurora</button>
+            <button class="theme-option" data-theme="ice">❄️ Ice</button>
+          </div>
+        </div>
+        <button class="menu-toggle" id="menuToggle" aria-label="Open menu"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <nav class="nav-mobile" id="navMobile" aria-label="Mobile">
+    <a href="index.html" class="active">Home</a>
+    <a href="websites.html">Websites</a>
+    <a href="learn.html">Learn</a>
+    <a href="plus.html">VEXDYN+</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+
+  <main class="main">
+    <!-- HERO -->
+    <section class="hero">
+      <!-- Liquid-metal wave atmosphere (homepage Hero only) -->
+      <div class="hero-waves" aria-hidden="true">
+        <!-- Wave 1 dark — flows FORWARD → -->
+        <svg class="hero-wave hero-wave-1" viewBox="0 0 2400 600" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="gWave1" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="var(--wave-dark-1)"/>
+              <stop offset="55%" stop-color="var(--wave-dark-1)"/>
+              <stop offset="100%" stop-color="transparent"/>
+            </linearGradient>
+          </defs>
+          <path fill="url(#gWave1)" d="M0,260 C200,160 400,360 600,260 C800,160 1000,360 1200,260 C1400,160 1600,360 1800,260 C2000,160 2200,360 2400,260 L2400,600 L0,600 Z"/>
+        </svg>
+        <!-- Wave 2 bright — flows BACKWARD ← -->
+        <svg class="hero-wave hero-wave-2" viewBox="0 0 2400 600" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="gWave2" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="var(--wave-bright-1)"/>
+              <stop offset="55%" stop-color="var(--wave-bright-1)"/>
+              <stop offset="100%" stop-color="transparent"/>
+            </linearGradient>
+          </defs>
+          <path fill="url(#gWave2)" d="M0,300 C250,400 450,200 700,300 C950,400 1150,200 1400,300 C1650,400 1850,200 2100,300 C2250,360 2350,240 2400,300 L2400,600 L0,600 Z"/>
+        </svg>
+      </div>
+      <img src="vexdyn-symbol-alpha.png" alt="" class="hero-geo" aria-hidden="true" />
+      <div class="hero-inner">
+        <img src="vexdyn-wordmark-true-transparent.png" alt="VEXDYN" class="hero-wordmark reveal" />
+        <div class="code-transform" id="codeTransform" aria-live="polite">0100110100101101</div>
+      </div>
+    </section>
+
+    <!-- STATEMENT — continuation of Hero -->
+    <section class="section statement-section" id="statement">
+      <div class="statement-inner reveal">
+        <h1 class="statement-title">
+          <span class="statement-light">BUILD WHAT'S</span>
+          <span class="statement-bold">NEXT.</span>
+        </h1>
+        <p class="statement-sub">Technology, tools and knowledge for turning digital ideas into reality.</p>
+        <div class="hero-ctas">
+          <a href="websites.html" class="btn btn-primary btn-lg">BUILD WITH VEXDYN <span class="arrow">→</span></a>
+          <a href="#ecosystem" class="btn btn-secondary btn-lg">EXPLORE VEXDYN</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ECOSYSTEM -->
+    <section class="section" id="ecosystem">
+      <div class="reveal text-center">
+        <span class="section-label">Platform</span>
+        <h2 class="section-title">THE VEXDYN ECOSYSTEM</h2>
+        <p class="section-sub mx-auto">CREATE. BUILD. LEARN.</p>
+      </div>
+      <div class="grid-3 mt-10">
+        <article class="v-card eco-item reveal">
+          <div class="eco-icon">◇</div>
+          <div class="eco-label">CREATE</div>
+          <p class="eco-desc">Professional websites designed and developed by VEXDYN.</p>
+        </article>
+        <article class="v-card eco-item reveal reveal-delay-1">
+          <div class="eco-icon">⬡</div>
+          <div class="eco-label">BUILD</div>
+          <p class="eco-desc">Future tools that allow you to create your own digital experiences.</p>
+        </article>
+        <article class="v-card eco-item reveal reveal-delay-2">
+          <div class="eco-icon">◎</div>
+          <div class="eco-label">LEARN</div>
+          <p class="eco-desc">Master the technologies that power the digital world.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- WEBSITE SERVICES -->
+    <section class="section-full band">
+      <div class="section" style="padding-top:0;padding-bottom:0">
+        <div class="reveal">
+          <span class="section-label">Website Creation</span>
+          <h2 class="section-title">NEED A WEBSITE?</h2>
+          <p class="section-sub">Tell us what you're building. We'll bring it to life.</p>
+        </div>
+        <div class="grid-4 mt-10">
+          <article class="v-card reveal">
+            <div class="svc-icon">
+              <svg viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 21v-6h6v6"/><path d="M9 9h.01"/><path d="M15 9h.01"/><path d="M9 13h.01"/><path d="M15 13h.01"/></svg>
+            </div>
+            <h3 class="v-card-title">Business</h3>
+            <p class="v-card-desc">Professional sites for companies, services and local businesses.</p>
+          </article>
+          <article class="v-card reveal reveal-delay-1">
+            <div class="svc-icon">
+              <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+            </div>
+            <h3 class="v-card-title">Commerce</h3>
+            <p class="v-card-desc">Restaurants, fashion brands and retail experiences.</p>
+          </article>
+          <article class="v-card reveal reveal-delay-2">
+            <div class="svc-icon">
+              <svg viewBox="0 0 24 24"><path d="m14.622 17.897-10.68-2.913"/><path d="M18.376 2.622a1 1 0 1 1 3.002 3.002L17.36 9.643a.5.5 0 0 0 0 .707l.944.944a2.41 2.41 0 0 1 0 3.408l-.944.944a.5.5 0 0 1-.707 0L8.354 7.348a.5.5 0 0 1 0-.707l.944-.944a2.41 2.41 0 0 1 3.408 0l.944.944a.5.5 0 0 0 .707 0z"/><path d="m5 20 1.5-1.5"/><path d="m9 18 1.5-1.5"/><path d="m2 22 1.5-1.5"/></svg>
+            </div>
+            <h3 class="v-card-title">Creative</h3>
+            <p class="v-card-desc">Portfolios, agencies and personal brands.</p>
+          </article>
+          <article class="v-card reveal reveal-delay-3">
+            <div class="svc-icon">
+              <svg viewBox="0 0 24 24"><path d="M12 3v18"/><path d="M3 12h18"/><circle cx="12" cy="12" r="9"/></svg>
+            </div>
+            <h3 class="v-card-title">Custom</h3>
+            <p class="v-card-desc">Landing pages and fully custom projects.</p>
+          </article>
+        </div>
+        <div class="text-center mt-10 reveal">
+          <a href="websites.html" class="btn btn-primary btn-lg">BUILD IT FOR ME <span class="arrow">→</span></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROCESS — horizontal -->
+    <section class="section process-section">
+      <div class="reveal text-center">
+        <span class="section-label">The Process</span>
+        <h2 class="section-title">IDEA → CREATE → BUILD → LAUNCH → GROW</h2>
+      </div>
+      <div class="process-track" id="processTrack">
+        <article class="v-card process-card">
+          <div class="process-icon">
+            <svg viewBox="0 0 24 24"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>
+          </div>
+          <div class="process-label">IDEA</div>
+        </article>
+        <span class="process-arrow" aria-hidden="true">→</span>
+        <article class="v-card process-card">
+          <div class="process-icon">
+            <svg viewBox="0 0 24 24"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg>
+          </div>
+          <div class="process-label">CREATE</div>
+        </article>
+        <span class="process-arrow" aria-hidden="true">→</span>
+        <article class="v-card process-card">
+          <div class="process-icon">
+            <svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+          </div>
+          <div class="process-label">BUILD</div>
+        </article>
+        <span class="process-arrow" aria-hidden="true">→</span>
+        <article class="v-card process-card">
+          <div class="process-icon">
+            <svg viewBox="0 0 24 24"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>
+          </div>
+          <div class="process-label">LAUNCH</div>
+        </article>
+        <span class="process-arrow" aria-hidden="true">→</span>
+        <article class="v-card process-card">
+          <div class="process-icon">
+            <svg viewBox="0 0 24 24"><path d="M16 7h6v6"/><path d="m22 7-8.5 8.5-5-5L2 17"/></svg>
+          </div>
+          <div class="process-label">GROW</div>
+        </article>
+      </div>
+    </section>
+
+    <!-- LEARN TEASER -->
+    <section class="section-full band">
+      <div class="section" style="padding-top:0;padding-bottom:0">
+        <div class="reveal">
+          <span class="section-label">VEXDYN Learn</span>
+          <h2 class="section-title">LEARN THE TOOLS OF TOMORROW.</h2>
+          <p class="section-sub">Master the technologies and skills needed to turn your ideas into digital reality.</p>
+        </div>
+        <div class="reveal reveal-delay-1" style="margin-top:28px">
+          <a href="learn.html" class="btn btn-primary btn-lg">EXPLORE VEXDYN LEARN <span class="arrow">→</span></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- VEXDYN+ -->
+    <section class="section" id="plus">
+      <div class="reveal text-center">
+        <span class="section-label">VEXDYN+</span>
+        <h2 class="section-title">Unlock the full experience.</h2>
+        <p class="section-sub mx-auto">Premium access for deeper tools, advanced learning and priority support.</p>
+      </div>
+      <div class="pricing-toggle-wrap">
+        <div class="pricing-toggle" id="pricingToggle" role="group" aria-label="Billing period">
+          <div class="toggle-indicator"></div>
+          <button class="toggle-btn active" id="toggleMonthly">Monthly</button>
+          <button class="toggle-btn" id="toggleYearly">Yearly</button>
+        </div>
+      </div>
+      <div class="price-cards">
+        <article class="v-card price-card reveal">
+          <div class="plan-name">Free</div>
+          <div class="plan-concept">Explore VEXDYN</div>
+          <div class="price-amount">₦0</div>
+          <div class="price-period">forever</div>
+          <ul class="price-features">
+            <li>Core learning paths</li>
+            <li>Website request form</li>
+            <li>Full theme system</li>
+            <li>Platform updates</li>
+          </ul>
+          <a href="plus.html" class="btn btn-secondary btn-block">START FREE →</a>
+        </article>
+        <article class="v-card price-card featured reveal reveal-delay-1">
+          <div class="plan-name">VEXDYN+</div>
+          <div class="plan-concept">Unlock the full VEXDYN experience</div>
+          <div class="price-amount" id="plusAmount">₦4,999</div>
+          <div class="price-period" id="plusPeriod">/ month</div>
+          <div class="price-save" id="plusSave" style="visibility:hidden"></div>
+          <ul class="price-features">
+            <li>Everything in Free</li>
+            <li>Advanced learning tracks</li>
+            <li>Priority website requests</li>
+            <li>Early Builder access</li>
+            <li>Direct founder support</li>
+          </ul>
+          <a href="plus.html" class="btn btn-primary btn-block">GET VEXDYN+ →</a>
+          <p class="placeholder-notice">Payment system coming soon</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- FUTURE BUILDER -->
+    <section class="section-full band" id="builder">
+      <div class="section" style="padding-top:0;padding-bottom:0">
+        <div class="reveal text-center">
+          <span class="section-label">Coming Soon</span>
+          <h2 class="section-title">SOMETHING BIGGER IS COMING.</h2>
+          <p class="section-sub mx-auto">VEXDYN Builder — Design. Customize. Build. Launch.</p>
+        </div>
+        <div class="builder-preview reveal reveal-delay-1">
+          <span class="builder-badge">COMING SOON</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- VISION -->
+    <section class="section">
+      <div class="reveal" style="max-width:560px">
+        <span class="section-label">Vision</span>
+        <h2 class="section-title">A platform built for creators who think ahead.</h2>
+        <p class="section-sub">VEXDYN exists to help you create, build and learn — with precision, clarity and power. No noise. Just tools and knowledge that move you forward.</p>
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="cta-banner">
+      <div class="reveal">
+        <h2>Ready to build what's next?</h2>
+        <p>Start with a website. Start with a lesson. Start with an idea.</p>
+        <div class="hero-ctas" style="justify-content:center">
+          <a href="websites.html" class="btn btn-primary btn-lg">BUILD WITH VEXDYN <span class="arrow">→</span></a>
+          <a href="learn.html" class="btn btn-secondary btn-lg">START LEARNING</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="vexdyn-logo-wordmark-alpha.png" alt="VEXDYN" class="logo-swap" height="32" />
+        <p>Technology, tools and knowledge for turning digital ideas into reality.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Platform</h4>
+        <a href="websites.html">Websites</a>
+        <a href="learn.html">Learn</a>
+        <a href="plus.html">VEXDYN+</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Founder</h4>
+        <div class="founder-card">
+          <span class="founder-name">David Augustine</span>
+          <span class="founder-title">Creator & Owner</span>
+          <span class="founder-contact">07025664141</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 VEXDYN. All rights reserved.</span>
+      <span>Build What's Next.</span>
+    </div>
+  </footer>
+
+  <!-- WhatsApp customer service -->
+  <a href="https://wa.me/2347025664141" class="wa-float" target="_blank" rel="noopener noreferrer" aria-label="Chat with VEXDYN on WhatsApp">
+    <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true" fill="currentColor">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+  </a>
+
+  <script src="script.js"></script>
+</body>
+</html>

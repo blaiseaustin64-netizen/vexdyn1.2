@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="obsidian">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="VEXDYN+ — premium access." />
+  <title>VEXDYN+ — VEXDYN</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="search-overlay" id="searchOverlay" role="dialog" aria-label="Search">
+    <div class="search-panel">
+      <div class="search-bar">
+        <input type="search" id="searchInput" placeholder="What are you looking for?" autocomplete="off" enterkeyhint="search" />
+        <button class="search-close" id="searchClose" aria-label="Close search">✕</button>
+      </div>
+      <div class="search-results" id="searchResults"></div>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="logo-link" aria-label="VEXDYN Home">
+        <img src="vexdyn-logo-wordmark-alpha.png" alt="VEXDYN" class="logo-swap" height="36" />
+      </a>
+      <nav class="nav-desktop" aria-label="Main">
+        <a href="index.html">Home</a>
+        <a href="websites.html">Websites</a>
+        <a href="learn.html">Learn</a>
+        <a href="plus.html" class="active">VEXDYN+</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <div class="header-actions">
+        <button class="cmd-btn" id="cmdBtn" aria-label="Search" title="Search">⌕</button>
+        <div class="theme-wrap">
+          <button class="theme-btn" id="themeBtn" aria-label="Change theme">🌙</button>
+          <div class="theme-panel" id="themePanel">
+            <button class="theme-option active" data-theme="obsidian">🌙 Obsidian</button>
+            <button class="theme-option" data-theme="aurora">☀️ Aurora</button>
+            <button class="theme-option" data-theme="ice">❄️ Ice</button>
+          </div>
+        </div>
+        <button class="menu-toggle" id="menuToggle" aria-label="Open menu"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+  <nav class="nav-mobile" id="navMobile">
+    <a href="index.html">Home</a>
+    <a href="websites.html">Websites</a>
+    <a href="learn.html">Learn</a>
+    <a href="plus.html" class="active">VEXDYN+</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+
+  <main class="main">
+    <div class="page-hero reveal text-center" style="max-width:var(--max-width);margin:0 auto">
+      <span class="section-label">VEXDYN+</span>
+      <h1>More power. More depth.</h1>
+      <p class="mx-auto">Premium access for advanced learning, priority requests and early tools.</p>
+    </div>
+
+    <section class="section" style="padding-top:0">
+      <div class="pricing-toggle-wrap">
+        <div class="pricing-toggle" id="pricingToggle" role="group">
+          <div class="toggle-indicator"></div>
+          <button class="toggle-btn active" id="toggleMonthly">Monthly</button>
+          <button class="toggle-btn" id="toggleYearly">Yearly</button>
+        </div>
+      </div>
+      <div class="price-cards">
+        <article class="v-card price-card reveal">
+          <div class="plan-name">Free</div>
+          <div class="plan-concept">Explore VEXDYN</div>
+          <div class="price-amount">₦0</div>
+          <div class="price-period">forever</div>
+          <ul class="price-features">
+            <li>Core learning paths</li>
+            <li>Website request form</li>
+            <li>Full theme system</li>
+            <li>Platform updates</li>
+          </ul>
+          <button class="btn btn-secondary btn-block" disabled>Current Plan</button>
+        </article>
+        <article class="v-card price-card featured reveal reveal-delay-1">
+          <div class="plan-name">VEXDYN+</div>
+          <div class="plan-concept">Unlock the full VEXDYN experience</div>
+          <div class="price-amount" id="plusAmount">₦4,999</div>
+          <div class="price-period" id="plusPeriod">/ month</div>
+          <div class="price-save" id="plusSave" style="visibility:hidden"></div>
+          <ul class="price-features">
+            <li>Everything in Free</li>
+            <li>Advanced learning tracks</li>
+            <li>Priority website requests</li>
+            <li>Early Builder access</li>
+            <li>Direct founder support</li>
+          </ul>
+          <button class="btn btn-primary btn-block" onclick="alert('Payment system is a frontend placeholder. Coming soon.')">GET VEXDYN+ →</button>
+          <p class="placeholder-notice">Payment system coming soon</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="vexdyn-logo-wordmark-alpha.png" alt="VEXDYN" class="logo-swap" height="32" />
+        <p>Technology, tools and knowledge for turning digital ideas into reality.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Platform</h4>
+        <a href="websites.html">Websites</a>
+        <a href="learn.html">Learn</a>
+        <a href="plus.html">VEXDYN+</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Founder</h4>
+        <div class="founder-card">
+          <span class="founder-name">David Augustine</span>
+          <span class="founder-title">Creator & Owner</span>
+          <span class="founder-contact">07025664141</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 VEXDYN. All rights reserved.</span>
+      <span>Build What's Next.</span>
+    </div>
+  </footer>
+  <!-- WhatsApp customer service -->
+  <a href="https://wa.me/2347025664141" class="wa-float" target="_blank" rel="noopener noreferrer" aria-label="Chat with VEXDYN on WhatsApp">
+    <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true" fill="currentColor">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+  </a>
+
+  <script src="script.js"></script>
+</body>
+</html>
