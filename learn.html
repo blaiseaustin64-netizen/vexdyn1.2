@@ -130,7 +130,10 @@
       <section class="section course-view-header">
         <button type="button" class="btn btn-secondary course-back" data-back-catalog>← All Courses</button>
         <div class="course-view-brand">
-          <span class="course-view-tech" style="color:#e34f26">HTML</span>
+          <div class="course-view-logo-row">
+            <span class="course-view-logo" aria-hidden="true"><svg viewBox="0 0 32 32" width="40" height="40"><path fill="#E34F26" d="M4 2l2.2 24.8L16 30l9.8-3.2L28 2H4zm17.5 8.2H12l.3 3.2h8.9l-.9 10.2L16 25.2l-4.3-1.2-.3-3.3h3.1l.1 1.5 1.4.4 1.4-.4.2-2.1H11.5l-.6-7.3h12.1l-.5 2.6z"/></svg></span>
+            <span class="course-view-tech" style="color:#e34f26">HTML</span>
+          </div>
           <h1 class="course-view-title">HTML Foundation</h1>
           <p class="course-view-sub">20 lessons · Structure the web with semantic markup</p>
         </div>
@@ -184,7 +187,10 @@
       <section class="section course-view-header">
         <button type="button" class="btn btn-secondary course-back" data-css-back-catalog>← All Courses</button>
         <div class="course-view-brand">
-          <span class="course-view-tech" style="color:#1572b6">CSS</span>
+          <div class="course-view-logo-row">
+            <span class="course-view-logo" aria-hidden="true"><svg viewBox="0 0 32 32" width="40" height="40"><path fill="#1572B6" d="M4 2l2.2 24.8L16 30l9.8-3.2L28 2H4zm17.4 8.1l-.4 4.2H12.1l.2 2.5h8.7l-.5 5.4L16 24.1l-4.5-1.2-.3-3.2h-3.2l.5 6.1L16 28l7.5-2.1 1-11.8H12.6l-.2-2.3h11.5l.5-1.7z"/></svg></span>
+            <span class="course-view-tech" style="color:#1572b6">CSS</span>
+          </div>
           <h1 class="course-view-title">CSS Design System</h1>
           <p class="course-view-sub">24 lessons · Transform structure into visual experience</p>
         </div>
@@ -254,7 +260,10 @@
       <section class="section course-view-header">
         <button type="button" class="btn btn-secondary course-back" data-js-back-catalog>← All Courses</button>
         <div class="course-view-brand">
-          <span class="course-view-tech" style="color:#f7df1e">JAVASCRIPT</span>
+          <div class="course-view-logo-row">
+            <span class="course-view-logo course-logo-js" aria-hidden="true"><svg viewBox="0 0 32 32" width="40" height="40"><rect width="32" height="32" rx="3" fill="#F7DF1E"/><path fill="#323330" d="M18.2 23.6c.4.7.8 1.3 1.8 1.3 1 0 1.6-.5 1.6-1.2 0-.8-.6-1.1-1.6-1.6l-.6-.2c-1.6-.7-2.7-1.6-2.7-3.4 0-1.7 1.3-3 3.3-3 1.4 0 2.5.5 3.2 1.8l-1.8 1.1c-.4-.7-.8-1-1.5-1-.7 0-1.1.4-1.1 1 0 .7.4 1 1.4 1.4l.6.3c1.9.8 3 1.8 3 3.8 0 2.1-1.7 3.3-3.9 3.3-2.2 0-3.6-1-4.3-2.4l1.9-1.1zm-7.4.2c.3.5.6.9 1.2.9.6 0 1-.2 1-.8V15h2.3v8.9c0 2.4-1.4 3.5-3.4 3.5-1.8 0-2.9-.9-3.4-2.1l1.9-1.1z"/></svg></span>
+            <span class="course-view-tech" style="color:#f7df1e">JAVASCRIPT</span>
+          </div>
           <h1 class="course-view-title">JavaScript — Power the Experience</h1>
           <p class="course-view-sub">32 lessons · Turn interfaces into interactive systems</p>
         </div>
@@ -324,7 +333,10 @@
       <section class="section course-view-header">
         <button type="button" class="btn btn-secondary course-back" data-react-back-catalog>← All Courses</button>
         <div class="course-view-brand">
-          <span class="course-view-tech" style="color:#61DAFB">REACT</span>
+          <div class="course-view-logo-row">
+            <span class="course-view-logo course-logo-react" aria-hidden="true"><svg viewBox="0 0 32 32" width="40" height="40"><circle cx="16" cy="16" r="2.4" fill="#61DAFB"/><g fill="none" stroke="#61DAFB" stroke-width="1.6"><ellipse cx="16" cy="16" rx="11" ry="4.2"/><ellipse cx="16" cy="16" rx="11" ry="4.2" transform="rotate(60 16 16)"/><ellipse cx="16" cy="16" rx="11" ry="4.2" transform="rotate(120 16 16)"/></g></svg></span>
+            <span class="course-view-tech" style="color:#61DAFB">REACT</span>
+          </div>
           <h1 class="course-view-title">React — Build Systems</h1>
           <p class="course-view-sub">36 lessons · From components to production architecture</p>
         </div>
@@ -421,6 +433,35 @@
       <span>Build What's Next.</span>
     </div>
   </footer>
+<script>
+(function () {
+  var loader = document.getElementById("learnEntryLoader");
+  if (!loader) return;
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var hold = reduce ? 500 : 8500;
+  document.documentElement.classList.add("learn-entry-pending");
+  // Fade wordmark in
+  requestAnimationFrame(function () {
+    loader.classList.add("is-visible");
+  });
+  function finish() {
+    loader.classList.add("is-done");
+    document.documentElement.classList.remove("learn-entry-pending");
+    // Force reveal content that may have been off-screen during loader
+    document.querySelectorAll(".reveal").forEach(function (el) {
+      el.classList.add("visible");
+    });
+    setTimeout(function () {
+      if (loader && loader.parentNode) loader.parentNode.removeChild(loader);
+    }, 700);
+  }
+  setTimeout(finish, hold);
+  // Safety: never leave user stuck longer than 12s
+  setTimeout(function () {
+    if (document.getElementById("learnEntryLoader")) finish();
+  }, 12000);
+})();
+</script>
 <script src="script.js"></script>
   <script src="learn.js"></script>
   <script src="html-course.js"></script>
