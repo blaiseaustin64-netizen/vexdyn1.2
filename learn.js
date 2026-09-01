@@ -191,6 +191,21 @@
     const filterBtns = document.querySelectorAll("[data-course-filter]");
     if (!grid) return;
 
+    // Sync HTML progress from localStorage if available
+    try {
+      const raw = localStorage.getItem("vexdyn-learn-html");
+      if (raw) {
+        const data = JSON.parse(raw);
+        const done = Array.isArray(data.completed) ? data.completed.length : 0;
+        const pct = Math.round((done / 20) * 100);
+        const htmlC = COURSES.find((c) => c.id === "html");
+        if (htmlC) {
+          htmlC.progress = pct;
+          htmlC.status = pct === 0 ? "not-started" : pct >= 100 ? "completed" : "in-progress";
+        }
+      }
+    } catch {}
+
     updateJourney(COURSES);
     if (pathTrack) pathTrack.innerHTML = renderPath(COURSES);
     renderCourses(COURSES);
@@ -218,11 +233,13 @@
     document.addEventListener("click", (e) => {
       const cta = e.target.closest("[data-course-cta]");
       if (!cta) return;
-      // Build 1: lessons not yet available
+      const id = cta.getAttribute("data-id");
+      // HTML course is handled by html-course.js
+      if (id === "html") return;
       const notice = document.getElementById("courseNotice");
       if (notice) {
         notice.hidden = false;
-        notice.textContent = "Lessons coming in Build 2 — progress tracking will connect here.";
+        notice.textContent = "This course opens in a future build. HTML is available now.";
         setTimeout(() => { notice.hidden = true; }, 3200);
       }
     });

@@ -58,6 +58,7 @@
   </nav>
 
   <main class="main">
+    <div id="learnCatalog">
     <section class="learn-hero">
       <div class="learn-hero-inner reveal">
         <span class="section-label">VEXDYN Learn</span>
@@ -118,6 +119,61 @@
       <p id="courseEmpty" class="course-empty" hidden>No courses match your search.</p>
       <div class="course-grid" id="courseGrid"></div>
     </section>
+    </div><!-- /learnCatalog -->
+
+    <!-- HTML COURSE VIEW -->
+    <div id="htmlCourseView" class="course-view" hidden>
+      <section class="section course-view-header">
+        <button type="button" class="btn btn-secondary course-back" data-back-catalog>← All Courses</button>
+        <div class="course-view-brand">
+          <span class="course-view-tech" style="color:#e34f26">HTML</span>
+          <h1 class="course-view-title">HTML Foundation</h1>
+          <p class="course-view-sub">20 lessons · Structure the web with semantic markup</p>
+        </div>
+        <div class="course-view-progress">
+          <div class="course-view-pct" id="htmlCoursePct">0%</div>
+          <div class="course-progress-bar course-view-bar"><div class="course-progress-fill" id="htmlCourseBar" style="width:0%;background:#e34f26"></div></div>
+          <div class="course-view-status" id="htmlCourseStatus">NOT STARTED</div>
+        </div>
+        <div id="htmlCompleteBanner" class="course-complete-banner" hidden>
+          HTML FOUNDATION COMPLETE · 100%
+        </div>
+      </section>
+      <section class="section" style="padding-top:0">
+        <h2 class="section-title" style="font-size:1.25rem;margin-bottom:18px">Lessons</h2>
+        <div class="lesson-list" id="htmlLessonList"></div>
+      </section>
+    </div>
+
+    <!-- HTML LESSON VIEW -->
+    <div id="htmlLessonView" class="lesson-view" hidden>
+      <section class="section lesson-view-inner">
+        <button type="button" class="btn btn-secondary course-back" data-back-course>← Lesson List</button>
+        <div class="lesson-header">
+          <span class="lesson-num" id="lessonNum">LESSON 01</span>
+          <h1 class="lesson-title" id="lessonTitle"></h1>
+          <p class="lesson-mission" id="lessonMission"></p>
+        </div>
+        <div class="lesson-block">
+          <h3 class="lesson-block-title">Definitions</h3>
+          <div id="lessonDefs"></div>
+        </div>
+        <div class="lesson-block">
+          <h3 class="lesson-block-title">Example</h3>
+          <pre class="lesson-code"><code id="lessonExample"></code></pre>
+        </div>
+        <div class="lesson-block">
+          <h3 class="lesson-block-title">Challenge</h3>
+          <p class="lesson-challenge" id="lessonChallenge"></p>
+        </div>
+        <div class="lesson-actions">
+          <button type="button" class="btn btn-secondary" id="lessonPrevBtn" data-goto="0">← Previous</button>
+          <button type="button" class="btn btn-primary" id="lessonCompleteBtn">MARK COMPLETE →</button>
+          <button type="button" class="btn btn-secondary" id="lessonNextBtn" data-goto="0">Next →</button>
+        </div>
+      </section>
+    </div>
+
   </main>
 
   <footer class="site-footer">
@@ -160,5 +216,6 @@
 
   <script src="script.js"></script>
   <script src="learn.js"></script>
+  <script src="html-course.js"></script>
 </body>
 </html>
