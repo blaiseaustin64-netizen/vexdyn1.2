@@ -357,10 +357,18 @@
       var back = e.target.closest("[data-build-back]");
       if (back) {
         var to = back.getAttribute("data-build-back");
-        if (to === "home") showView("buildHome");
-        if (to === "types") showView("buildTypeStage");
+        // Hierarchical back only — one level
+        if (to === "home") {
+          showView("buildHome");
+        } else if (to === "types") {
+          // From form → types (preserve state)
+          showView("buildTypeStage");
+        }
         return;
       }
+
+      // Step-level back inside form (data-build-next with lower step)
+      // already handled below via data-build-next
 
       var cat = e.target.closest("[data-cat-id]");
       if (cat) {
@@ -443,56 +451,82 @@
       var right = document.getElementById("buildLaneRight");
       if (!left || !right) return;
 
-      // Disable CSS keyframe animation; drive with scroll instead
-      left.classList.add("is-scroll-mode");
-      right.classList.add("is-scroll-mode");
-
-      var lanes = [
-        { el: left, dir: 1, speed: 0.45 },
-        { el: right, dir: -1, speed: 0.4 }
-      ];
-      var paused = false;
-      var resumeTimer = null;
-
-      function pauseAuto() {
-        paused = true;
-        if (resumeTimer) clearTimeout(resumeTimer);
-        resumeTimer = setTimeout(function () {
-          paused = false;
-        }, 2800);
-      }
-
-      lanes.forEach(function (lane) {
-        var el = lane.el;
-        el.addEventListener("pointerdown", pauseAuto);
-        el.addEventListener("wheel", pauseAuto, { passive: true });
-        el.addEventListener("touchstart", pauseAuto, { passive: true });
-        el.addEventListener("scroll", function () {
-          // user scroll activity
-          if (!paused) pauseAuto();
-        }, { passive: true });
-      });
-
-      if (reduce) return;
-
-      function tick() {
-        if (!paused) {
-          lanes.forEach(function (lane) {
-            var el = lane.el;
-            var max = el.scrollWidth - el.clientWidth;
-            if (max <= 0) return;
-            el.scrollLeft += lane.dir * lane.speed;
-            // loop
-            if (lane.dir > 0 && el.scrollLeft >= max - 1) {
-              el.scrollLeft = 0;
-            } else if (lane.dir < 0 && el.scrollLeft <= 1) {
-              el.scrollLeft = max;
-            }
-          });
+      function setupLane(viewport, direction) {
+        var track = viewport.querySelector(".build-lane-track");
+        if (!track) return;
+        viewport.classList.add("is-marquee");
+        // Ensure duplicated content for seamless loop
+        if (track.children.length > 0 && track.children.length < 16) {
+          track.innerHTML = track.innerHTML + track.innerHTML;
         }
-        requestAnimationFrame(tick);
+        var offset = direction > 0 ? 0 : -track.scrollWidth / 4;
+        var speed = direction > 0 ? 0.55 : 0.5; // px per frame-ish
+        var dragStartX = 0;
+        var dragStartOffset = 0;
+        var dragging = false;
+
+        function loopBounds() {
+          var half = track.scrollWidth / 2;
+          if (half <= 0) return;
+          while (offset <= -half) offset += half;
+          while (offset > 0) offset -= half;
+        }
+
+        function apply() {
+          loopBounds();
+          track.style.transform = "translate3d(" + offset + "px,0,0)";
+        }
+
+        function frame() {
+          if (!reduce) {
+            offset += -direction * speed; // top dir+ moves left (negative), bottom dir- moves right
+          }
+          apply();
+          requestAnimationFrame(frame);
+        }
+
+        viewport.addEventListener("pointerdown", function (e) {
+          if (e.target.closest(".build-cat-card") && !e.target.closest(".build-cat-card")) return;
+          // allow drag on track empty space and cards (card click still works if minimal move)
+          dragging = true;
+          dragStartX = e.clientX;
+          dragStartOffset = offset;
+          viewport.setPointerCapture(e.pointerId);
+        });
+        viewport.addEventListener("pointermove", function (e) {
+          if (!dragging) return;
+          var dx = e.clientX - dragStartX;
+          offset = dragStartOffset + dx;
+          apply();
+          // automatic motion continues on next frames too
+        });
+        function endDrag(e) {
+          if (!dragging) return;
+          dragging = false;
+          try { viewport.releasePointerCapture(e.pointerId); } catch (err) {}
+        }
+        viewport.addEventListener("pointerup", endDrag);
+        viewport.addEventListener("pointercancel", endDrag);
+
+        // Click selection still handled globally; suppress click if dragged far
+        var moved = 0;
+        viewport.addEventListener("pointerdown", function (e) { moved = 0; dragStartX = e.clientX; });
+        viewport.addEventListener("pointermove", function (e) {
+          if (dragging) moved = Math.max(moved, Math.abs(e.clientX - dragStartX));
+        });
+        viewport.addEventListener("click", function (e) {
+          if (moved > 12) {
+            e.preventDefault();
+            e.stopPropagation();
+          }
+        }, true);
+
+        requestAnimationFrame(frame);
       }
-      requestAnimationFrame(tick);
+
+      // direction: 1 = content moves left, -1 = content moves right
+      setupLane(left, 1);
+      setupLane(right, -1);
     })();
 
     // Reveal

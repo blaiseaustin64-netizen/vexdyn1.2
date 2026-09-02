@@ -3362,3 +3362,52 @@ html[data-theme="aurora"] .course-card {
 .build-cat-card {
   touch-action: pan-x pan-y;
 }
+
+
+/* Build marquee — continuous, never paused */
+.build-lane.is-marquee {
+  overflow: hidden !important;
+  cursor: grab;
+  touch-action: pan-y;
+}
+.build-lane.is-marquee:active { cursor: grabbing; }
+.build-lane.is-marquee .build-lane-track {
+  animation: none !important;
+  display: flex;
+  gap: 14px;
+  width: max-content;
+  will-change: transform;
+}
+.build-lanes.is-paused .build-lane-track {
+  animation-play-state: running !important;
+}
+
+
+/* LEARN WORDMARK ALIGN — desktop straight, mobile unchanged */
+.learn-hero {
+  text-align: center;
+}
+.learn-hero-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto;
+}
+.learn-hero-wordmark {
+  display: block;
+  width: auto !important;
+  max-width: min(360px, 80vw) !important;
+  height: auto !important;
+  margin: 0 auto 16px !important;
+  object-fit: contain !important;
+  object-position: center !important;
+  transform: none !important;
+  image-rendering: auto;
+}
+@media (min-width: 900px) {
+  .learn-hero-wordmark {
+    max-width: 420px !important;
+  }
+}

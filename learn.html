@@ -9,73 +9,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
-  <style id="learn-loader-critical">
-  #learnEntryLoader {
-    position: fixed !important;
-    inset: 0 !important;
-    width: 100vw !important;
-    height: 100vh !important;
-    z-index: 2147483000 !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    border: none !important;
-    border-radius: 0 !important;
-    box-shadow: none !important;
-    background: #0a0a0f !important;
-  }
-  html[data-theme="aurora"] #learnEntryLoader {
-    background: #f7f5f0 !important;
-  }
-  #learnEntryLoader img {
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-    border-radius: 0 !important;
-    max-width: 55vw !important;
-    height: auto !important;
-  }
-  html[data-theme="aurora"] #learnEntryLoader img {
-    /* logo is light strokes — invert for light bg */
-    filter: brightness(0) !important;
-  }
-  html[data-theme="aurora"] body { background: #f7f5f0 !important; }
-  html[data-theme="aurora"] .course-card,
-  html[data-theme="aurora"] .lesson-item {
-    background: #ffffff !important;
-    border: 1px solid rgba(30,28,40,0.2) !important;
-    box-shadow: 0 10px 30px rgba(30,25,40,0.08) !important;
-  }
-  html[data-theme="aurora"] .course-logo,
-  html[data-theme="aurora"] .course-logo svg {
-    filter: none !important;
-    opacity: 1 !important;
-  }
-  .learn-hero-wordmark {
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-  }
-  html[data-theme="aurora"] .learn-hero-wordmark {
-    filter: brightness(0) !important;
-  }
-  /* Don't put hero wordmark inside a solid white panel box */
-  html[data-theme="aurora"] .learn-hero-inner {
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-  }
-</style>
-
-</head>
+  </head>
 <body>
-    <div id="learnEntryLoader" class="learn-entry-loader" aria-live="polite" aria-label="Loading VEXDYN Learn" style="position:fixed;top:0;left:0;right:0;bottom:0;width:100vw;height:100vh;margin:0;padding:0;border:none;border-radius:0;box-shadow:none;z-index:2147483000;display:flex;align-items:center;justify-content:center;background:#0a0a0f;">
-    <img src="vexdyn-loader-mark.png" alt="VEXDYN" class="learn-entry-wordmark" width="200" height="152" style="display:block;width:min(200px,55vw);height:auto;margin:0;padding:0;border:none;border-radius:0;box-shadow:none;background:transparent;background-color:transparent;object-fit:contain;" />
-  </div>
-
-  <header class="site-header">
+<header class="site-header">
     <div class="header-inner">
       <a href="index.html" class="logo-link" aria-label="VEXDYN Home">
         <img src="vexdyn-logo-wordmark-alpha.png" alt="VEXDYN" class="logo-swap" height="36" />
@@ -94,7 +30,6 @@
           <button class="theme-btn" id="themeBtn" aria-label="Change theme">🌙</button>
           <div class="theme-panel" id="themePanel">
             <button class="theme-option active" data-theme="obsidian">🌙 Obsidian</button>
-            <button class="theme-option" data-theme="aurora">☀️ Aurora</button>
             <button class="theme-option" data-theme="ice">❄️ Ice</button>
           </div>
         </div>
@@ -487,70 +422,32 @@
   </footer>
 <script>
 (function () {
-  var loader = document.getElementById("learnEntryLoader");
-  function kickProgress() {
-    function run() {
-      if (window.VEXDYN_LEARN && typeof window.VEXDYN_LEARN.animateCatalogProgress === "function") {
-        window.VEXDYN_LEARN.animateCatalogProgress();
-      }
-    }
-    if (document.readyState === "loading") {
-      document.addEventListener("DOMContentLoaded", function () { setTimeout(run, 200); });
-    } else {
-      setTimeout(run, 200);
+  function run() {
+    if (window.VEXDYN_LEARN && typeof window.VEXDYN_LEARN.animateCatalogProgress === "function") {
+      window.VEXDYN_LEARN.animateCatalogProgress();
     }
   }
-  // Only show Learn loader once per browser session
-  var alreadyEntered = false;
-  try { alreadyEntered = sessionStorage.getItem("vexdyn-learn-entered") === "1"; } catch (e) {}
-  if (!loader || alreadyEntered) {
-    if (loader && loader.parentNode) loader.parentNode.removeChild(loader);
-    document.documentElement.classList.remove("learn-entry-pending");
-    kickProgress();
-    return;
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", function () { setTimeout(run, 250); });
+  } else {
+    setTimeout(run, 250);
   }
-  try { sessionStorage.setItem("vexdyn-learn-entered", "1"); } catch (e) {}
-  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var hold = reduce ? 350 : 2200;
-  var HARD_MAX = 4000;
-  var finished = false;
-
-  document.documentElement.classList.add("learn-entry-pending");
-  var theme = document.documentElement.getAttribute("data-theme") || "obsidian";
-  if (loader) {
-    loader.style.background = (theme === "aurora") ? "#f7f5f0" : (theme === "ice" ? "#021018" : "#0a0a0f");
+})();
+</script>
+<script>
+(function(){
+  var t = document.documentElement.getAttribute("data-theme");
+  if (t === "aurora") {
+    document.documentElement.setAttribute("data-theme", "obsidian");
+    try { localStorage.setItem("vexdyn-theme", "obsidian"); } catch(e) {}
   }
-  // Force visible frame before animation
-  loader.style.opacity = "1";
-  loader.style.visibility = "visible";
-  void loader.offsetWidth;
-  requestAnimationFrame(function () {
-    loader.classList.add("is-visible");
-  });
-
-  function finish() {
-    if (finished) return;
-    finished = true;
-    loader.classList.add("is-done");
-    document.documentElement.classList.remove("learn-entry-pending");
-    document.querySelectorAll(".reveal").forEach(function (el) {
-      el.classList.add("visible");
-    });
-    function runProgress() {
-      if (window.VEXDYN_LEARN && typeof window.VEXDYN_LEARN.animateCatalogProgress === "function") {
-        window.VEXDYN_LEARN.animateCatalogProgress();
-      } else {
-        setTimeout(runProgress, 50);
-      }
+  document.addEventListener("click", function(e){
+    var opt = e.target.closest("[data-theme=\"aurora\"]");
+    if (opt && opt.classList.contains("theme-option")) {
+      e.preventDefault();
+      e.stopPropagation();
     }
-    runProgress();
-    setTimeout(function () {
-      if (loader && loader.parentNode) loader.parentNode.removeChild(loader);
-    }, 550);
-  }
-
-  setTimeout(finish, hold);
-  setTimeout(finish, HARD_MAX);
+  }, true);
 })();
 </script>
 <script src="script.js"></script>

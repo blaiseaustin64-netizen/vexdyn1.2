@@ -479,4 +479,16 @@
   }
 
   window.VEXDYN_LEARN = { COURSES, statusFromProgress, updateJourney, renderCourses, animateCatalogProgress };
+  // Step-back support for Learn views
+  window.addEventListener("popstate", function (e) {
+    if (!e.state || !e.state.vexdynLearn) return;
+    var catalog = document.getElementById("learnCatalog");
+    var views = ["htmlCourseView","htmlLessonView","cssCourseView","cssLessonView","jsCourseView","jsLessonView","reactCourseView","reactLessonView"];
+    if (e.state.vexdynLearn === "catalog") {
+      views.forEach(function (id) { var el = document.getElementById(id); if (el) el.hidden = true; });
+      if (catalog) catalog.hidden = false;
+      if (typeof animateCatalogProgress === "function") setTimeout(animateCatalogProgress, 100);
+    }
+  });
+
 })();
