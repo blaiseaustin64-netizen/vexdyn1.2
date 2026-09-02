@@ -2544,216 +2544,6 @@ button.lesson-item.is-complete,
   background: rgba(97, 218, 251, 0.12);
 }
 
-/* ========== LEARN ENTRY LOADER ========== */
-.learn-entry-loader {
-  position: fixed !important;
-  top: 0 !important;
-  left: 0 !important;
-  right: 0 !important;
-  bottom: 0 !important;
-  width: 100vw !important;
-  height: 100vh !important;
-  min-width: 100vw !important;
-  min-height: 100vh !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  border: none !important;
-  border-radius: 0 !important;
-  box-shadow: none !important;
-  z-index: 100000 !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  background: var(--bg-primary, #0a0a0f) !important;
-  transition: opacity 0.55s ease, visibility 0.55s ease;
-}
-.learn-entry-loader .learn-entry-wordmark {
-  display: block;
-  width: min(300px, 72vw);
-  max-width: 300px;
-  height: auto;
-  margin: 0;
-  padding: 0;
-  border: none !important;
-  border-radius: 0 !important;
-  box-shadow: none !important;
-  background: transparent !important;
-  background-color: transparent !important;
-  opacity: 0;
-  transform: scale(0.96);
-  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
-  object-fit: contain;
-  image-rendering: auto;
-}
-.learn-entry-loader.is-visible .learn-entry-wordmark {
-  opacity: 1;
-  transform: scale(1);
-}
-.learn-entry-loader.is-done {
-  opacity: 0 !important;
-  visibility: hidden !important;
-  pointer-events: none !important;
-}
-html.learn-entry-pending,
-html.learn-entry-pending body {
-  overflow: hidden !important;
-}
-/* Aurora: dark wordmark on light loader, no blur/box */
-[data-theme="aurora"] .learn-entry-loader {
-  background: #f4f2ec !important;
-}
-[data-theme="aurora"] .learn-entry-loader .learn-entry-wordmark {
-  filter: brightness(0) saturate(100%);
-  opacity: 0;
-}
-[data-theme="aurora"] .learn-entry-loader.is-visible .learn-entry-wordmark {
-  opacity: 0.9;
-  filter: brightness(0) saturate(100%);
-}
-
-/* Learn hero wordmark */
-.learn-hero-wordmark {
-  display: block;
-  width: auto;
-  max-width: min(420px, 82vw);
-  height: auto;
-  margin: 0 auto 18px;
-  background: transparent !important;
-}
-@media (min-width: 900px) {
-  .learn-hero-wordmark {
-    max-width: min(520px, 48vw);
-  }
-}
-[data-theme="aurora"] .learn-hero-wordmark {
-  filter: brightness(0) saturate(100%);
-  opacity: 0.9;
-  image-rendering: auto;
-}
-
-/* Homepage footer contact buttons (not floating) */
-.footer-contact-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  justify-content: center;
-  max-width: var(--max-width);
-  margin: 0 auto 28px;
-  padding: 0 20px;
-}
-.footer-contact-btn {
-  min-width: 160px;
-  text-align: center;
-}
-
-/* Course-specific lesson list accents */
-#htmlCourseView .lesson-item-num { color: #e34f26 !important; }
-#htmlCourseView .lesson-item:hover {
-  border-color: rgba(227, 79, 38, 0.55) !important;
-  box-shadow: var(--shadow-lg), 0 0 24px rgba(227, 79, 38, 0.18) !important;
-}
-#htmlCourseView .lesson-badge-done {
-  color: #e34f26;
-  border-color: rgba(227, 79, 38, 0.4);
-  background: rgba(227, 79, 38, 0.12);
-}
-
-#cssCourseView .lesson-item-num { color: #1572b6 !important; }
-#cssCourseView .lesson-item:hover {
-  border-color: rgba(21, 114, 182, 0.55) !important;
-  box-shadow: var(--shadow-lg), 0 0 24px rgba(21, 114, 182, 0.18) !important;
-}
-#cssCourseView .lesson-badge-done {
-  color: #1572b6;
-  border-color: rgba(21, 114, 182, 0.4);
-  background: rgba(21, 114, 182, 0.12);
-}
-
-#jsCourseView .lesson-item-num { color: #f7df1e !important; }
-#jsCourseView .lesson-item:hover {
-  border-color: rgba(247, 223, 30, 0.5) !important;
-  box-shadow: var(--shadow-lg), 0 0 24px rgba(247, 223, 30, 0.15) !important;
-}
-
-#reactCourseView .lesson-item-num { color: #61dafb !important; }
-#reactCourseView .lesson-item:hover {
-  border-color: rgba(97, 218, 251, 0.55) !important;
-  box-shadow: var(--shadow-lg), 0 0 24px rgba(97, 218, 251, 0.18) !important;
-}
-
-/* Course identity chip on lesson pages */
-.lesson-course-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  margin-bottom: 10px;
-}
-.lesson-course-chip svg {
-  width: 18px;
-  height: 18px;
-}
-
-
-/* Learn entry loader safety */
-.learn-entry-loader {
-  position: fixed;
-  inset: 0;
-  z-index: 10000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--bg-primary, #0a0a0f);
-  transition: opacity 0.65s ease, visibility 0.65s ease;
-}
-.learn-entry-loader.is-done {
-  opacity: 0 !important;
-  visibility: hidden !important;
-  pointer-events: none !important;
-}
-
-/* Footer contact left aligned */
-.footer-contact-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  justify-content: flex-start;
-  max-width: var(--max-width, 1120px);
-  margin: 0 auto 28px;
-  padding: 0 20px;
-}
-.footer-contact-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  min-width: 160px;
-}
-.footer-contact-btn .wa-icon {
-  flex-shrink: 0;
-}
-
-/* Course logos in course headers */
-.course-view-logo-row {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 8px;
-}
-.course-view-logo {
-  display: inline-flex;
-  line-height: 0;
-}
-.course-view-logo svg {
-  display: block;
-  width: 40px;
-  height: 40px;
-}
-
 
 /* ========== AURORA GLASS DEPTH ========== */
 [data-theme="aurora"] .course-card,
@@ -2822,9 +2612,7 @@ html.learn-entry-pending body {
   box-shadow: 0 4px 16px rgba(91, 33, 182, 0.18);
 }
 
-[data-theme="aurora"] .learn-entry-loader {
-  background: var(--loader-bg);
-}
+
 
 /* Soften aggressive glows in Aurora */
 [data-theme="aurora"] .course-card-accent,
@@ -2882,69 +2670,15 @@ html.learn-entry-pending body {
 
 
 /* ========== LEARN ENTRY LOADER (FIXED) ========== */
-.learn-entry-loader {
-  position: fixed !important;
-  inset: 0 !important;
-  width: 100vw !important;
-  height: 100vh !important;
-  max-width: none !important;
-  max-height: none !important;
-  z-index: 10000 !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  border: none !important;
-  border-radius: 0 !important;
-  box-shadow: none !important;
-  background: var(--bg-primary, #0a0a0f) !important;
-  transition: opacity 0.55s ease, visibility 0.55s ease !important;
-}
-.learn-entry-loader .learn-entry-wordmark {
-  display: block !important;
-  width: min(280px, 72vw) !important;
-  max-width: min(280px, 72vw) !important;
-  height: auto !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  border: none !important;
-  border-radius: 0 !important;
-  box-shadow: none !important;
-  background: transparent !important;
-  background-color: transparent !important;
-  opacity: 0;
-  transform: scale(0.96);
-  filter: none !important;
-  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.85s cubic-bezier(0.16, 1, 0.3, 1) !important;
-}
-.learn-entry-loader.is-visible .learn-entry-wordmark {
-  opacity: 1 !important;
-  transform: scale(1) !important;
-  filter: none !important;
-}
-.learn-entry-loader.is-done {
-  opacity: 0 !important;
-  visibility: hidden !important;
-  pointer-events: none !important;
-}
-html.learn-entry-pending,
-html.learn-entry-pending body {
-  overflow: hidden !important;
-}
+
+
+
+
+
 /* Aurora: invert wordmark for light bg — crisp, no pixelation filters */
-[data-theme="aurora"] .learn-entry-loader {
-  background: #f4f2ec !important;
-}
-[data-theme="aurora"] .learn-entry-loader .learn-entry-wordmark {
-  filter: brightness(0) saturate(100%) !important;
-  opacity: 0;
-}
-[data-theme="aurora"] .learn-entry-loader.is-visible .learn-entry-wordmark {
-  opacity: 0.9 !important;
-  filter: brightness(0) saturate(100%) !important;
-}
+
+
+
 [data-theme="aurora"] .learn-hero-wordmark {
   filter: brightness(0) saturate(100%) !important;
   opacity: 0.9;
@@ -3416,4 +3150,192 @@ button.build-chip.is-selected {
 [data-theme="aurora"] .build-coming-soon {
   background: rgba(255, 255, 255, 0.9) !important;
   border: 1px solid rgba(30, 28, 40, 0.2) !important;
+}
+
+
+/* ============================================================
+   AUTHORITATIVE LEARN ENTRY LOADER + AURORA FIX (do not duplicate)
+   ============================================================ */
+.learn-entry-loader {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  max-width: none !important;
+  max-height: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  outline: none !important;
+  z-index: 2147483000 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: #0a0a0f !important;
+  background-image: none !important;
+  overflow: hidden !important;
+  transition: opacity 0.5s ease, visibility 0.5s ease !important;
+}
+.learn-entry-loader .learn-entry-wordmark,
+.learn-entry-loader img {
+  display: block !important;
+  width: min(320px, 70vw) !important;
+  max-width: min(320px, 70vw) !important;
+  height: auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  outline: none !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  object-fit: contain !important;
+  opacity: 0;
+  transform: scale(0.97);
+  filter: none !important;
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+.learn-entry-loader.is-visible .learn-entry-wordmark,
+.learn-entry-loader.is-visible img {
+  opacity: 1 !important;
+  transform: scale(1) !important;
+  filter: none !important;
+}
+.learn-entry-loader.is-done {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+html.learn-entry-pending,
+html.learn-entry-pending body {
+  overflow: hidden !important;
+}
+
+/* Aurora loader: light full-screen, dark crisp wordmark */
+[data-theme="aurora"] .learn-entry-loader {
+  background: #f7f5f0 !important;
+}
+[data-theme="aurora"] .learn-entry-loader .learn-entry-wordmark,
+[data-theme="aurora"] .learn-entry-loader.is-visible .learn-entry-wordmark,
+[data-theme="aurora"] .learn-entry-loader img,
+[data-theme="aurora"] .learn-entry-loader.is-visible img {
+  filter: brightness(0) saturate(100%) !important;
+}
+[data-theme="aurora"] .learn-entry-loader.is-visible .learn-entry-wordmark,
+[data-theme="aurora"] .learn-entry-loader.is-visible img {
+  opacity: 0.92 !important;
+}
+
+/* Aurora page: bright pearl + real glass */
+html[data-theme="aurora"],
+html[data-theme="aurora"] body {
+  background: #f7f5f0 !important;
+  background-color: #f7f5f0 !important;
+}
+html[data-theme="aurora"] {
+  --bg-deep: #f0eee8 !important;
+  --bg-primary: #f7f5f0 !important;
+  --bg-secondary: #efece5 !important;
+  --bg-elevated: #e9e5dd !important;
+  --bg-card: rgba(255, 255, 255, 0.92) !important;
+  --bg-glass: rgba(255, 255, 255, 0.82) !important;
+  --border: rgba(25, 22, 35, 0.14) !important;
+  --border-strong: rgba(25, 22, 35, 0.24) !important;
+  --border-metal: rgba(40, 36, 55, 0.3) !important;
+  --text-primary: #1a1820 !important;
+  --text-secondary: #4a4754 !important;
+  --text-muted: #6a6774 !important;
+  --shadow: 0 10px 32px rgba(25, 22, 35, 0.08) !important;
+  --shadow-lg: 0 20px 48px rgba(25, 22, 35, 0.12) !important;
+}
+html[data-theme="aurora"] .course-card,
+html[data-theme="aurora"] .lesson-item,
+html[data-theme="aurora"] .stat-card,
+html[data-theme="aurora"] .path-node,
+html[data-theme="aurora"] .journey-stat,
+html[data-theme="aurora"] .course-view-header,
+html[data-theme="aurora"] .lesson-block,
+html[data-theme="aurora"] .lesson-view-inner,
+html[data-theme="aurora"] .learn-hero-inner,
+html[data-theme="aurora"] .course-toolbar,
+html[data-theme="aurora"] .site-header,
+html[data-theme="aurora"] .build-path-card,
+html[data-theme="aurora"] .build-cat-card,
+html[data-theme="aurora"] .build-form-main {
+  background: rgba(255, 255, 255, 0.94) !important;
+  border: 1px solid rgba(25, 22, 35, 0.2) !important;
+  box-shadow: 0 12px 36px rgba(25, 22, 35, 0.09), inset 0 1px 0 #fff !important;
+  backdrop-filter: blur(18px) !important;
+  -webkit-backdrop-filter: blur(18px) !important;
+}
+
+/* Course brand icons — never gray in Aurora */
+html[data-theme="aurora"] .course-logo,
+html[data-theme="aurora"] .course-logo svg,
+html[data-theme="aurora"] .course-logo svg *,
+html[data-theme="aurora"] .path-logo,
+html[data-theme="aurora"] .path-logo svg,
+html[data-theme="aurora"] .path-logo svg *,
+html[data-theme="aurora"] .course-view-logo,
+html[data-theme="aurora"] .course-view-logo svg,
+html[data-theme="aurora"] .course-view-logo svg * {
+  filter: none !important;
+  opacity: 1 !important;
+  -webkit-filter: none !important;
+}
+
+/* Hero/learn wordmarks in Aurora: dark crisp, no pixelation filters beyond invert */
+html[data-theme="aurora"] .learn-hero-wordmark {
+  filter: brightness(0) saturate(100%) !important;
+  opacity: 0.9 !important;
+  image-rendering: auto !important;
+}
+
+/* ===== FINAL AURORA + LOADER HARD FIX ===== */
+html[data-theme="aurora"] {
+  --bg-deep: #f3f1eb !important;
+  --bg-primary: #f7f5f0 !important;
+  --bg-secondary: #f0ede6 !important;
+  --bg-elevated: #ebe7e0 !important;
+  --bg-card: rgba(255, 255, 255, 0.92) !important;
+  --bg-glass: rgba(255, 255, 255, 0.85) !important;
+  --border: rgba(28, 26, 36, 0.18) !important;
+  --border-strong: rgba(28, 26, 36, 0.28) !important;
+  --border-metal: rgba(40, 38, 55, 0.34) !important;
+}
+html[data-theme="aurora"] body {
+  background: #f7f5f0 !important;
+  background-color: #f7f5f0 !important;
+}
+html[data-theme="aurora"] .course-card,
+html[data-theme="aurora"] .lesson-item,
+html[data-theme="aurora"] .stat-card,
+html[data-theme="aurora"] .path-node,
+html[data-theme="aurora"] .build-path-card,
+html[data-theme="aurora"] .build-cat-card,
+html[data-theme="aurora"] .build-form-main {
+  background: rgba(255, 255, 255, 0.94) !important;
+  border: 1px solid rgba(28, 26, 36, 0.24) !important;
+  box-shadow: 0 12px 40px rgba(30, 25, 40, 0.1), inset 0 1px 0 #fff !important;
+}
+html[data-theme="aurora"] .course-logo,
+html[data-theme="aurora"] .course-logo svg,
+html[data-theme="aurora"] .course-view-logo,
+html[data-theme="aurora"] .course-view-logo svg,
+html[data-theme="aurora"] .path-logo svg {
+  filter: none !important;
+  opacity: 1 !important;
+  -webkit-filter: none !important;
+}
+/* Prevent any parent grayscale */
+html[data-theme="aurora"] .course-card {
+  filter: none !important;
 }
