@@ -126,6 +126,8 @@
   }
 
   function initSearch() {
+    // Search UI removed from VEXDYN
+    return;
     const btn = document.getElementById("cmdBtn");
     const overlay = document.getElementById("searchOverlay");
     const input = document.getElementById("searchInput");
@@ -202,14 +204,11 @@
       document.body.classList.add("loaded");
     }
 
-    // RETURNING VISITOR — short path (~1.5–2s)
+    // RETURNING VISITOR — no loader, home immediately
     if (!isFirstVisit) {
-      if (symbol) symbol.classList.add("visible");
-      setTimeout(() => {
-        if (symbol) { symbol.classList.add("hide"); symbol.classList.remove("visible"); }
-        if (lockup) lockup.classList.add("visible");
-      }, 500);
-      setTimeout(finish, 1800);
+      overlay.classList.add("done");
+      overlay.style.display = "none";
+      document.body.classList.add("loaded");
       return;
     }
 

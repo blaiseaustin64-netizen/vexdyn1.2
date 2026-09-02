@@ -435,19 +435,65 @@
       }
     });
 
-    // Pause lanes on hover/focus for easier selection
-    var lanes = document.getElementById("buildLanes");
-    if (lanes) {
-      lanes.addEventListener("mouseenter", function () {
-        lanes.classList.add("is-paused");
+    // Category lanes: auto-scroll + manual browse + selection
+    // Uses scrollLeft so users can swipe/drag freely; auto resumes after idle.
+    (function initLanes() {
+      var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      var left = document.getElementById("buildLaneLeft");
+      var right = document.getElementById("buildLaneRight");
+      if (!left || !right) return;
+
+      // Disable CSS keyframe animation; drive with scroll instead
+      left.classList.add("is-scroll-mode");
+      right.classList.add("is-scroll-mode");
+
+      var lanes = [
+        { el: left, dir: 1, speed: 0.45 },
+        { el: right, dir: -1, speed: 0.4 }
+      ];
+      var paused = false;
+      var resumeTimer = null;
+
+      function pauseAuto() {
+        paused = true;
+        if (resumeTimer) clearTimeout(resumeTimer);
+        resumeTimer = setTimeout(function () {
+          paused = false;
+        }, 2800);
+      }
+
+      lanes.forEach(function (lane) {
+        var el = lane.el;
+        el.addEventListener("pointerdown", pauseAuto);
+        el.addEventListener("wheel", pauseAuto, { passive: true });
+        el.addEventListener("touchstart", pauseAuto, { passive: true });
+        el.addEventListener("scroll", function () {
+          // user scroll activity
+          if (!paused) pauseAuto();
+        }, { passive: true });
       });
-      lanes.addEventListener("mouseleave", function () {
-        lanes.classList.remove("is-paused");
-      });
-      lanes.addEventListener("touchstart", function () {
-        lanes.classList.add("is-paused");
-      }, { passive: true });
-    }
+
+      if (reduce) return;
+
+      function tick() {
+        if (!paused) {
+          lanes.forEach(function (lane) {
+            var el = lane.el;
+            var max = el.scrollWidth - el.clientWidth;
+            if (max <= 0) return;
+            el.scrollLeft += lane.dir * lane.speed;
+            // loop
+            if (lane.dir > 0 && el.scrollLeft >= max - 1) {
+              el.scrollLeft = 0;
+            } else if (lane.dir < 0 && el.scrollLeft <= 1) {
+              el.scrollLeft = max;
+            }
+          });
+        }
+        requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    })();
 
     // Reveal
     document.querySelectorAll(".reveal").forEach(function (el) {

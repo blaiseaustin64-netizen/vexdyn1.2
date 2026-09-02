@@ -3339,3 +3339,26 @@ html[data-theme="aurora"] .path-logo svg {
 html[data-theme="aurora"] .course-card {
   filter: none !important;
 }
+
+/* Build lanes — manual scroll + auto */
+.build-lane.is-scroll-mode {
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  cursor: grab;
+}
+.build-lane.is-scroll-mode::-webkit-scrollbar { display: none; }
+.build-lane.is-scroll-mode .build-lane-track {
+  animation: none !important;
+  transform: none !important;
+  width: max-content;
+}
+.build-lanes {
+  mask-image: none;
+  -webkit-mask-image: none;
+}
+/* Selecting a card must not lock lanes */
+.build-cat-card {
+  touch-action: pan-x pan-y;
+}
