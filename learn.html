@@ -438,28 +438,34 @@
   var loader = document.getElementById("learnEntryLoader");
   if (!loader) return;
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var hold = reduce ? 500 : 8500;
+  // Hard ceiling 4000ms; prefer ~2400ms when ready
+  var hold = reduce ? 300 : 2400;
+  var HARD_MAX = 4000;
   document.documentElement.classList.add("learn-entry-pending");
-  // Fade wordmark in
   requestAnimationFrame(function () {
     loader.classList.add("is-visible");
   });
+  var finished = false;
   function finish() {
+    if (finished) return;
+    finished = true;
     loader.classList.add("is-done");
     document.documentElement.classList.remove("learn-entry-pending");
-    // Force reveal content that may have been off-screen during loader
     document.querySelectorAll(".reveal").forEach(function (el) {
       el.classList.add("visible");
     });
+    // Kick staggered course progress animation after reveal
+    try {
+      if (window.VEXDYN_LEARN && typeof window.VEXDYN_LEARN.animateCatalogProgress === "function") {
+        window.VEXDYN_LEARN.animateCatalogProgress();
+      }
+    } catch (e) {}
     setTimeout(function () {
       if (loader && loader.parentNode) loader.parentNode.removeChild(loader);
-    }, 700);
+    }, 500);
   }
   setTimeout(finish, hold);
-  // Safety: never leave user stuck longer than 12s
-  setTimeout(function () {
-    if (document.getElementById("learnEntryLoader")) finish();
-  }, 12000);
+  setTimeout(finish, HARD_MAX);
 })();
 </script>
 <script src="script.js"></script>

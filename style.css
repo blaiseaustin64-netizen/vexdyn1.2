@@ -52,35 +52,37 @@
 
 /* ========== AURORA ========== */
 [data-theme="aurora"] {
-  --bg-deep: #f4f3ef;
-  --bg-primary: #f7f6f2;
-  --bg-secondary: #eeede8;
-  --bg-elevated: #e6e5e0;
-  --bg-card: rgba(255, 255, 255, 0.7);
-  --bg-glass: rgba(255, 255, 255, 0.55);
-  --border: rgba(0, 0, 0, 0.06);
-  --border-strong: rgba(0, 0, 0, 0.1);
-  --border-metal: rgba(100, 100, 130, 0.2);
-  --text-primary: #18181f;
-  --text-secondary: #4a4a58;
-  --text-muted: #78788a;
-  --accent: #7c3aed;
-  --accent-soft: rgba(124, 58, 237, 0.1);
-  --accent-glow: rgba(124, 58, 237, 0.22);
-  --highlight: #6d28d9;
-  --silver: rgba(90, 90, 120, 0.35);
-  --shadow: 0 8px 28px rgba(0, 0, 0, 0.06);
-  --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.08);
-  --particle: rgba(124, 58, 237, 0.3);
-  --loader-bg: #efece6;
+  /* Soft pearl — not pure white */
+  --bg-deep: #e4e1da;
+  --bg-primary: #ebe8e1;
+  --bg-secondary: #e0dcd4;
+  --bg-elevated: #d5d1c9;
+  /* Visible frosted glass on light ground */
+  --bg-card: rgba(255, 255, 255, 0.55);
+  --bg-glass: rgba(255, 255, 255, 0.48);
+  --border: rgba(40, 35, 50, 0.16);
+  --border-strong: rgba(40, 35, 50, 0.24);
+  --border-metal: rgba(70, 65, 90, 0.28);
+  --text-primary: #22212a;
+  --text-secondary: #524f5c;
+  --text-muted: #6f6c7a;
+  --accent: #5b21b6;
+  --accent-soft: rgba(91, 33, 182, 0.07);
+  --accent-glow: rgba(91, 33, 182, 0.1);
+  --highlight: #4c1d95;
+  --silver: rgba(70, 68, 90, 0.22);
+  --shadow: 0 8px 28px rgba(30, 25, 40, 0.1);
+  --shadow-lg: 0 18px 48px rgba(30, 25, 40, 0.14);
+  --particle: rgba(91, 33, 182, 0.12);
+  --loader-bg: #e4e0d8;
   --gradient-atm:
-    radial-gradient(ellipse 90% 55% at 50% -15%, rgba(180, 160, 220, 0.18), transparent 55%),
-    radial-gradient(ellipse 55% 40% at 95% 75%, rgba(160, 190, 230, 0.12), transparent 50%),
-    radial-gradient(ellipse 45% 30% at 5% 55%, rgba(200, 180, 220, 0.1), transparent 45%);
-  --wave-dark-1: rgba(90, 95, 120, 0.22);
-  --wave-dark-2: rgba(120, 125, 145, 0.10);
-  --wave-bright-1: rgba(60, 65, 90, 0.18);
-  --wave-bright-2: rgba(45, 50, 65, 0.08);
+    radial-gradient(ellipse 90% 55% at 50% -15%, rgba(140, 130, 180, 0.09), transparent 55%),
+    radial-gradient(ellipse 55% 40% at 95% 75%, rgba(120, 150, 190, 0.06), transparent 50%),
+    radial-gradient(ellipse 45% 30% at 5% 55%, rgba(160, 145, 180, 0.05), transparent 45%);
+  --wave-dark-1: rgba(80, 85, 110, 0.14);
+  --wave-dark-2: rgba(110, 115, 135, 0.07);
+  --wave-bright-1: rgba(55, 60, 85, 0.11);
+  --wave-bright-2: rgba(40, 45, 60, 0.05);
 }
 
 /* ========== ICE ========== */
@@ -2559,9 +2561,17 @@ button.lesson-item.is-complete,
   width: min(280px, 70vw);
   height: auto;
   opacity: 0;
-  transform: translateY(8px);
-  transition: opacity 1.4s cubic-bezier(0.16, 1, 0.3, 1), transform 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: scale(0.94) translateY(6px);
+  filter: blur(6px);
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.9s cubic-bezier(0.16, 1, 0.3, 1);
   background: transparent !important;
+}
+.learn-entry-loader.is-visible .learn-entry-wordmark {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  filter: blur(0);
 }
 .learn-entry-loader.is-visible .learn-entry-wordmark {
   opacity: 1;
@@ -2722,4 +2732,87 @@ html.learn-entry-pending body {
   display: block;
   width: 40px;
   height: 40px;
+}
+
+
+/* ========== AURORA GLASS DEPTH ========== */
+[data-theme="aurora"] .course-card,
+[data-theme="aurora"] .lesson-item,
+[data-theme="aurora"] .stat-card,
+[data-theme="aurora"] .path-node,
+[data-theme="aurora"] .journey-card,
+[data-theme="aurora"] .course-view-header,
+[data-theme="aurora"] .lesson-block,
+[data-theme="aurora"] .learn-hero-inner {
+  background: rgba(255, 255, 255, 0.45) !important;
+  backdrop-filter: blur(14px) saturate(1.1);
+  -webkit-backdrop-filter: blur(14px) saturate(1.1);
+  border: 1px solid rgba(40, 35, 50, 0.12) !important;
+  box-shadow:
+    0 8px 28px rgba(30, 25, 40, 0.07),
+    inset 0 1px 0 rgba(255, 255, 255, 0.65) !important;
+}
+[data-theme="aurora"] .course-card:hover,
+[data-theme="aurora"] .lesson-item:hover {
+  background: rgba(255, 255, 255, 0.55) !important;
+  border-color: rgba(40, 35, 50, 0.18) !important;
+  box-shadow:
+    0 14px 36px rgba(30, 25, 40, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.75) !important;
+}
+[data-theme="aurora"] .course-progress-bar,
+[data-theme="aurora"] .course-view-bar {
+  background: rgba(40, 35, 50, 0.08) !important;
+}
+[data-theme="aurora"] body {
+  background-color: var(--bg-primary);
+}
+
+
+/* ========== Aurora glass depth + brightness control ========== */
+[data-theme="aurora"] .course-card,
+[data-theme="aurora"] .lesson-item,
+[data-theme="aurora"] .path-card,
+[data-theme="aurora"] .journey-stat,
+[data-theme="aurora"] .learn-hero-inner,
+[data-theme="aurora"] .course-view-header,
+[data-theme="aurora"] .lesson-view-inner,
+[data-theme="aurora"] .site-header {
+  background: var(--bg-card);
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow), inset 0 1px 0 rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(14px) saturate(1.05);
+  -webkit-backdrop-filter: blur(14px) saturate(1.05);
+}
+
+[data-theme="aurora"] .course-card:hover,
+[data-theme="aurora"] .lesson-item:hover {
+  box-shadow: var(--shadow-lg), inset 0 1px 0 rgba(255, 255, 255, 0.65);
+  border-color: var(--border-metal);
+}
+
+[data-theme="aurora"] .lesson-code,
+[data-theme="aurora"] .js-code,
+[data-theme="aurora"] .react-code {
+  background: rgba(35, 34, 42, 0.92);
+  border-color: rgba(40, 35, 50, 0.2);
+}
+
+[data-theme="aurora"] .btn-primary {
+  box-shadow: 0 4px 16px rgba(91, 33, 182, 0.18);
+}
+
+[data-theme="aurora"] .learn-entry-loader {
+  background: var(--loader-bg);
+}
+
+/* Soften aggressive glows in Aurora */
+[data-theme="aurora"] .course-card-accent,
+[data-theme="aurora"] .hero-wave-1,
+[data-theme="aurora"] .hero-wave-2 {
+  opacity: 0.55;
+}
+
+[data-theme="aurora"] .course-progress-fill {
+  box-shadow: none;
 }

@@ -106,8 +106,8 @@
           <span class="course-lessons">${course.lessons} Lessons</span>
         </div>
         <div class="course-progress">
-          <div class="course-progress-bar"><div class="course-progress-fill" data-progress-fill style="width:${course.progress}%"></div></div>
-          <span class="course-progress-num" data-progress-num>${course.progress}%</span>
+          <div class="course-progress-bar"><div class="course-progress-fill" data-progress-fill data-target-progress="${course.progress}" style="width:0%;background:${course.color}"></div></div>
+          <span class="course-progress-num" data-progress-num data-target-progress="${course.progress}">0%</span>
         </div>
         <div class="course-status" data-status>${STATUS_LABEL[status]}</div>
         <button type="button" class="btn btn-primary course-cta" data-course-cta data-id="${course.id}">${STATUS_CTA[status]} →</button>
@@ -250,6 +250,10 @@
     updateJourney(COURSES);
     if (pathTrack) pathTrack.innerHTML = renderPath(COURSES);
     renderCourses(COURSES);
+    // Progress animates after entry loader finishes; fallback if loader absent
+    setTimeout(function () {
+      if (!document.getElementById("learnEntryLoader")) animateCatalogProgress();
+    }, 100);
 
     let activeFilter = "all";
 
@@ -396,5 +400,51 @@
   document.addEventListener("DOMContentLoaded", initLearn);
 
   // Expose for Build 2
-  window.VEXDYN_LEARN = { COURSES, statusFromProgress, updateJourney, renderCourses };
+  
+  function animateCatalogProgress() {
+    const cards = document.querySelectorAll("#courseGrid .course-card, #courseGrid [data-course-id]");
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const list = cards.length ? Array.from(cards) : Array.from(document.querySelectorAll("[data-progress-fill]"));
+    list.forEach(function (card, index) {
+      const fill = card.querySelector ? card.querySelector("[data-progress-fill]") : null;
+      const num = card.querySelector ? card.querySelector("[data-progress-num]") : null;
+      if (!fill) return;
+      const target = parseFloat(
+        fill.getAttribute("data-target-progress") ||
+        (num && num.getAttribute("data-target-progress")) ||
+        "0"
+      ) || 0;
+      const color = fill.style.background || "";
+      if (color) fill.style.background = color;
+
+      fill.style.transition = "none";
+      fill.style.width = "0%";
+      if (num) num.textContent = "0%";
+
+      const delay = reduce ? 0 : index * 160;
+      const duration = reduce ? 0 : (target <= 10 ? 1000 : target <= 50 ? 1300 : 1600);
+
+      setTimeout(function () {
+        if (reduce) {
+          fill.style.width = target + "%";
+          if (num) num.textContent = Math.round(target) + "%";
+          return;
+        }
+        fill.style.transition = "width " + duration + "ms cubic-bezier(0.16, 1, 0.3, 1)";
+        fill.style.width = target + "%";
+
+        const start = performance.now();
+        function tick(now) {
+          const t = Math.min(1, (now - start) / duration);
+          const eased = 1 - Math.pow(1 - t, 3);
+          if (num) num.textContent = Math.round(target * eased) + "%";
+          if (t < 1) requestAnimationFrame(tick);
+          else if (num) num.textContent = Math.round(target) + "%";
+        }
+        requestAnimationFrame(tick);
+      }, delay);
+    });
+  }
+
+  window.VEXDYN_LEARN = { COURSES, statusFromProgress, updateJourney, renderCourses, animateCatalogProgress };
 })();
