@@ -10,55 +10,70 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
   <style id="learn-loader-critical">
-  #learnEntryLoader.learn-entry-loader {
+  #learnEntryLoader {
     position: fixed !important;
-    top: 0 !important; left: 0 !important; right: 0 !important; bottom: 0 !important;
-    width: 100vw !important; height: 100vh !important;
-    min-width: 100vw !important; min-height: 100vh !important;
-    max-width: none !important; max-height: none !important;
-    margin: 0 !important; padding: 0 !important;
-    border: 0 !important; border-radius: 0 !important; box-shadow: none !important;
+    inset: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
     z-index: 2147483000 !important;
-    display: flex !important; align-items: center !important; justify-content: center !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
     background: #0a0a0f !important;
   }
-  html[data-theme="aurora"] #learnEntryLoader.learn-entry-loader {
+  html[data-theme="aurora"] #learnEntryLoader {
     background: #f7f5f0 !important;
   }
-  #learnEntryLoader .learn-entry-wordmark {
+  #learnEntryLoader img {
     background: transparent !important;
-    background-color: transparent !important;
-    border: 0 !important; box-shadow: none !important; border-radius: 0 !important;
-    width: min(320px, 70vw) !important; height: auto !important;
-    filter: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    max-width: 55vw !important;
+    height: auto !important;
   }
-  html[data-theme="aurora"] #learnEntryLoader .learn-entry-wordmark {
+  html[data-theme="aurora"] #learnEntryLoader img {
+    /* logo is light strokes — invert for light bg */
     filter: brightness(0) !important;
   }
-  /* Aurora global */
   html[data-theme="aurora"] body { background: #f7f5f0 !important; }
   html[data-theme="aurora"] .course-card,
   html[data-theme="aurora"] .lesson-item {
-    background: rgba(255,255,255,0.92) !important;
-    border: 1px solid rgba(30,28,40,0.22) !important;
+    background: #ffffff !important;
+    border: 1px solid rgba(30,28,40,0.2) !important;
+    box-shadow: 0 10px 30px rgba(30,25,40,0.08) !important;
   }
   html[data-theme="aurora"] .course-logo,
-  html[data-theme="aurora"] .course-logo svg,
-  html[data-theme="aurora"] .course-view-logo svg {
-    filter: none !important; opacity: 1 !important;
+  html[data-theme="aurora"] .course-logo svg {
+    filter: none !important;
+    opacity: 1 !important;
+  }
+  .learn-hero-wordmark {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
   }
   html[data-theme="aurora"] .learn-hero-wordmark {
     filter: brightness(0) !important;
-    image-rendering: auto !important;
+  }
+  /* Don't put hero wordmark inside a solid white panel box */
+  html[data-theme="aurora"] .learn-hero-inner {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
   }
 </style>
 
 </head>
 <body>
-  <div id="learnEntryLoader" class="learn-entry-loader" aria-live="polite" aria-label="Loading VEXDYN Learn">
-    <img src="vexdyn-wordmark-true-transparent.png" alt="VEXDYN" class="learn-entry-wordmark" />
+    <div id="learnEntryLoader" class="learn-entry-loader" aria-live="polite" aria-label="Loading VEXDYN Learn" style="position:fixed;top:0;left:0;right:0;bottom:0;width:100vw;height:100vh;margin:0;padding:0;border:none;border-radius:0;box-shadow:none;z-index:2147483000;display:flex;align-items:center;justify-content:center;background:#0a0a0f;">
+    <img src="vexdyn-loader-mark.png" alt="VEXDYN" class="learn-entry-wordmark" width="200" height="152" style="display:block;width:min(200px,55vw);height:auto;margin:0;padding:0;border:none;border-radius:0;box-shadow:none;background:transparent;background-color:transparent;object-fit:contain;" />
   </div>
-
   <div class="search-overlay" id="searchOverlay" role="dialog" aria-label="Search">
     <div class="search-panel">
       <div class="search-bar">
@@ -111,7 +126,7 @@
     <div id="learnCatalog">
     <section class="learn-hero">
       <div class="learn-hero-inner reveal">
-        <img src="vexdyn-wordmark-true-transparent.png" alt="VEXDYN" class="learn-hero-wordmark" />
+        <img src="vexdyn-wordmark-true-transparent.png" alt="VEXDYN" class="learn-hero-wordmark" style="background:transparent;border:none;box-shadow:none;" />
         <h1 class="learn-hero-title">LEARN THE TOOLS OF TOMORROW.</h1>
         <p class="learn-hero-sub">Master the technologies and skills needed to turn your ideas into digital reality.</p>
         <a href="#courses" class="btn btn-primary">START YOUR JOURNEY <span class="arrow">→</span></a>
@@ -497,6 +512,10 @@
   var finished = false;
 
   document.documentElement.classList.add("learn-entry-pending");
+  var theme = document.documentElement.getAttribute("data-theme") || "obsidian";
+  if (loader) {
+    loader.style.background = (theme === "aurora") ? "#f7f5f0" : (theme === "ice" ? "#021018" : "#0a0a0f");
+  }
   // Force visible frame before animation
   loader.style.opacity = "1";
   loader.style.visibility = "visible";
