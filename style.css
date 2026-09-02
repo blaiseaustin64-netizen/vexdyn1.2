@@ -53,16 +53,16 @@
 /* ========== AURORA ========== */
 [data-theme="aurora"] {
   /* Soft pearl — not pure white */
-  --bg-deep: #e4e1da;
-  --bg-primary: #ebe8e1;
-  --bg-secondary: #e0dcd4;
-  --bg-elevated: #d5d1c9;
-  /* Visible frosted glass on light ground */
-  --bg-card: rgba(255, 255, 255, 0.55);
-  --bg-glass: rgba(255, 255, 255, 0.48);
-  --border: rgba(40, 35, 50, 0.16);
-  --border-strong: rgba(40, 35, 50, 0.24);
-  --border-metal: rgba(70, 65, 90, 0.28);
+  --bg-deep: #ddd9d0;
+  --bg-primary: #e6e2da;
+  --bg-secondary: #dcd7ce;
+  --bg-elevated: #d0cbc1;
+  /* Brighter glass panels vs cooler pearl ground */
+  --bg-card: rgba(255, 255, 255, 0.72);
+  --bg-glass: rgba(255, 255, 255, 0.62);
+  --border: rgba(35, 30, 45, 0.2);
+  --border-strong: rgba(35, 30, 45, 0.32);
+  --border-metal: rgba(55, 50, 75, 0.36);
   --text-primary: #22212a;
   --text-secondary: #524f5c;
   --text-muted: #6f6c7a;
@@ -2815,4 +2815,47 @@ html.learn-entry-pending body {
 
 [data-theme="aurora"] .course-progress-fill {
   box-shadow: none;
+}
+
+
+/* ========== CRITICAL AURORA GLASS (final override) ========== */
+[data-theme="aurora"] body {
+  background-color: #e6e2da !important;
+}
+[data-theme="aurora"] .course-card,
+[data-theme="aurora"] .lesson-item,
+[data-theme="aurora"] .stat-card,
+[data-theme="aurora"] .path-node,
+[data-theme="aurora"] .journey-stat,
+[data-theme="aurora"] .journey-card,
+[data-theme="aurora"] .course-view-header,
+[data-theme="aurora"] .lesson-block,
+[data-theme="aurora"] .lesson-view-inner,
+[data-theme="aurora"] .learn-hero-inner,
+[data-theme="aurora"] .course-toolbar,
+[data-theme="aurora"] .site-header {
+  background: rgba(255, 255, 255, 0.78) !important;
+  border: 1px solid rgba(35, 30, 45, 0.22) !important;
+  box-shadow:
+    0 10px 32px rgba(30, 25, 40, 0.1),
+    0 1px 0 rgba(255, 255, 255, 0.9) inset !important;
+  backdrop-filter: blur(16px) saturate(1.08) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(1.08) !important;
+}
+[data-theme="aurora"] .course-card:hover,
+[data-theme="aurora"] .lesson-item:hover {
+  background: rgba(255, 255, 255, 0.88) !important;
+  border-color: rgba(35, 30, 45, 0.32) !important;
+  box-shadow:
+    0 16px 40px rgba(30, 25, 40, 0.14),
+    0 1px 0 rgba(255, 255, 255, 1) inset !important;
+}
+[data-theme="aurora"] .course-progress-bar,
+[data-theme="aurora"] .course-view-bar {
+  background: rgba(35, 30, 45, 0.12) !important;
+  border: 1px solid rgba(35, 30, 45, 0.08);
+}
+[data-theme="aurora"] .section-label,
+[data-theme="aurora"] .text-muted {
+  color: #5c5966 !important;
 }

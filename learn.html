@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div id="learnEntryLoader" class="learn-entry-loader" aria-live="polite" aria-label="Loading VEXDYN Learn">
+  <div id="learnEntryLoader" class="learn-entry-loader" aria-live="polite" aria-label="Loading VEXDYN Learn" style="position:fixed;inset:0;z-index:10000;display:flex;align-items:center;justify-content:center;background:#0a0a0f;">
     <img src="vexdyn-wordmark-true-transparent.png" alt="VEXDYN" class="learn-entry-wordmark" />
   </div>
 
@@ -436,16 +436,28 @@
 <script>
 (function () {
   var loader = document.getElementById("learnEntryLoader");
-  if (!loader) return;
+  if (!loader) {
+    document.addEventListener("DOMContentLoaded", function () {
+      if (window.VEXDYN_LEARN && window.VEXDYN_LEARN.animateCatalogProgress) {
+        setTimeout(window.VEXDYN_LEARN.animateCatalogProgress, 200);
+      }
+    });
+    return;
+  }
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  // Hard ceiling 4000ms; prefer ~2400ms when ready
-  var hold = reduce ? 300 : 2400;
+  var hold = reduce ? 350 : 2200;
   var HARD_MAX = 4000;
+  var finished = false;
+
   document.documentElement.classList.add("learn-entry-pending");
+  // Force visible frame before animation
+  loader.style.opacity = "1";
+  loader.style.visibility = "visible";
+  void loader.offsetWidth;
   requestAnimationFrame(function () {
     loader.classList.add("is-visible");
   });
-  var finished = false;
+
   function finish() {
     if (finished) return;
     finished = true;
@@ -454,16 +466,19 @@
     document.querySelectorAll(".reveal").forEach(function (el) {
       el.classList.add("visible");
     });
-    // Kick staggered course progress animation after reveal
-    try {
+    function runProgress() {
       if (window.VEXDYN_LEARN && typeof window.VEXDYN_LEARN.animateCatalogProgress === "function") {
         window.VEXDYN_LEARN.animateCatalogProgress();
+      } else {
+        setTimeout(runProgress, 50);
       }
-    } catch (e) {}
+    }
+    runProgress();
     setTimeout(function () {
       if (loader && loader.parentNode) loader.parentNode.removeChild(loader);
-    }, 500);
+    }, 550);
   }
+
   setTimeout(finish, hold);
   setTimeout(finish, HARD_MAX);
 })();

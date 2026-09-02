@@ -466,6 +466,9 @@
         e.preventDefault();
         syncCatalogProgress();
         showView("catalog");
+        if (window.VEXDYN_LEARN && typeof window.VEXDYN_LEARN.animateCatalogProgress === "function") {
+          setTimeout(function () { window.VEXDYN_LEARN.animateCatalogProgress(); }, 120);
+        }
         return;
       }
 

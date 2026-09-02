@@ -122,7 +122,7 @@
         <div class="path-node" style="--tech-color:${c.color}">
           <div class="path-logo">${logo}</div>
           <div class="path-name">${c.name}</div>
-          <div class="path-pct">${c.progress}%</div>
+          <div class="path-pct" data-journey-pct data-target-progress="${c.progress}">0%</div>
         </div>
         ${i < ordered.length - 1 ? '<span class="path-arrow" aria-hidden="true">→</span>' : ""}
       `;
@@ -250,10 +250,12 @@
     updateJourney(COURSES);
     if (pathTrack) pathTrack.innerHTML = renderPath(COURSES);
     renderCourses(COURSES);
-    // Progress animates after entry loader finishes; fallback if loader absent
+    // Always schedule progress animation:
+    // - if entry loader exists, finish() will also call this (re-entry safe via double-call is OK)
+    // - if loader already gone, run shortly after paint
     setTimeout(function () {
-      if (!document.getElementById("learnEntryLoader")) animateCatalogProgress();
-    }, 100);
+      animateCatalogProgress();
+    }, document.getElementById("learnEntryLoader") ? 2600 : 200);
 
     let activeFilter = "all";
 
@@ -402,46 +404,76 @@
   // Expose for Build 2
   
   function animateCatalogProgress() {
-    const cards = document.querySelectorAll("#courseGrid .course-card, #courseGrid [data-course-id]");
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const list = cards.length ? Array.from(cards) : Array.from(document.querySelectorAll("[data-progress-fill]"));
-    list.forEach(function (card, index) {
-      const fill = card.querySelector ? card.querySelector("[data-progress-fill]") : null;
-      const num = card.querySelector ? card.querySelector("[data-progress-num]") : null;
-      if (!fill) return;
-      const target = parseFloat(
-        fill.getAttribute("data-target-progress") ||
-        (num && num.getAttribute("data-target-progress")) ||
-        "0"
-      ) || 0;
-      const color = fill.style.background || "";
-      if (color) fill.style.background = color;
+    const cards = Array.from(document.querySelectorAll("#courseGrid .course-card[data-course-id]"));
+    if (!cards.length) return;
 
+    cards.forEach(function (card, index) {
+      const fill = card.querySelector("[data-progress-fill]");
+      const num = card.querySelector("[data-progress-num]");
+      if (!fill) return;
+
+      var target = parseFloat(fill.getAttribute("data-target-progress") || "0");
+      if (isNaN(target)) target = 0;
+      target = Math.max(0, Math.min(100, target));
+
+      // Reset visual display to 0 without touching stored progress
       fill.style.transition = "none";
       fill.style.width = "0%";
       if (num) num.textContent = "0%";
+      // Force reflow so the browser registers the 0% state
+      void fill.offsetWidth;
 
-      const delay = reduce ? 0 : index * 160;
-      const duration = reduce ? 0 : (target <= 10 ? 1000 : target <= 50 ? 1300 : 1600);
+      var delay = reduce ? 0 : index * 180;
+      var duration = reduce ? 0 : (target <= 15 ? 1100 : target <= 55 ? 1400 : 1650);
 
       setTimeout(function () {
-        if (reduce) {
+        if (reduce || duration === 0) {
           fill.style.width = target + "%";
           if (num) num.textContent = Math.round(target) + "%";
           return;
         }
-        fill.style.transition = "width " + duration + "ms cubic-bezier(0.16, 1, 0.3, 1)";
-        fill.style.width = target + "%";
 
-        const start = performance.now();
-        function tick(now) {
-          const t = Math.min(1, (now - start) / duration);
-          const eased = 1 - Math.pow(1 - t, 3);
-          if (num) num.textContent = Math.round(target * eased) + "%";
-          if (t < 1) requestAnimationFrame(tick);
-          else if (num) num.textContent = Math.round(target) + "%";
+        var t0 = performance.now();
+        function frame(now) {
+          var t = Math.min(1, (now - t0) / duration);
+          // easeOutCubic
+          var eased = 1 - Math.pow(1 - t, 3);
+          var val = target * eased;
+          fill.style.width = val + "%";
+          if (num) num.textContent = Math.round(val) + "%";
+          if (t < 1) {
+            requestAnimationFrame(frame);
+          } else {
+            fill.style.width = target + "%";
+            if (num) num.textContent = Math.round(target) + "%";
+          }
         }
-        requestAnimationFrame(tick);
+        requestAnimationFrame(frame);
+      }, delay);
+    });
+
+    // Journey / overall tracker numbers if present
+    var journeyPct = document.querySelectorAll("[data-journey-pct]");
+    journeyPct.forEach(function (el, i) {
+      var target = parseFloat(el.getAttribute("data-target-progress") || el.textContent) || 0;
+      if (reduce) {
+        el.textContent = Math.round(target) + "%";
+        return;
+      }
+      el.textContent = "0%";
+      var delay = 80 + i * 120;
+      var duration = 1300;
+      setTimeout(function () {
+        var t0 = performance.now();
+        function frame(now) {
+          var t = Math.min(1, (now - t0) / duration);
+          var eased = 1 - Math.pow(1 - t, 3);
+          el.textContent = Math.round(target * eased) + "%";
+          if (t < 1) requestAnimationFrame(frame);
+          else el.textContent = Math.round(target) + "%";
+        }
+        requestAnimationFrame(frame);
       }, delay);
     });
   }

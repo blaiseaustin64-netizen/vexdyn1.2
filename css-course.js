@@ -688,6 +688,9 @@
         if (cssCourse) cssCourse.hidden = true;
         if (cssLesson) cssLesson.hidden = true;
         window.scrollTo({ top: 0, behavior: "smooth" });
+        if (window.VEXDYN_LEARN && typeof window.VEXDYN_LEARN.animateCatalogProgress === "function") {
+          setTimeout(function () { window.VEXDYN_LEARN.animateCatalogProgress(); }, 120);
+        }
         return;
       }
 
