@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="obsidian">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="VEXDYN Build — Create your next digital experience. Build for me or build it yourself." />
+  <title>VEXDYN Build — Create Beyond Limits</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="search-overlay" id="searchOverlay" role="dialog" aria-label="Search">
+    <div class="search-panel">
+      <div class="search-bar">
+        <input type="search" id="searchInput" placeholder="What are you looking for?" autocomplete="off" enterkeyhint="search" />
+        <button class="search-close" id="searchClose" aria-label="Close search">✕</button>
+      </div>
+      <div class="search-results" id="searchResults"></div>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="logo-link" aria-label="VEXDYN Home">
+        <img src="vexdyn-logo-wordmark-alpha.png" alt="VEXDYN" class="logo-swap" height="36" />
+      </a>
+      <nav class="nav-desktop" aria-label="Main">
+        <a href="index.html">Home</a>
+        <a href="websites.html">Websites</a>
+        <a href="build.html" class="active">Build</a>
+        <a href="learn.html">Learn</a>
+        <a href="plus.html">VEXDYN+</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <div class="header-actions">
+        <button class="cmd-btn" id="cmdBtn" aria-label="Search" title="Search">⌕</button>
+        <div class="theme-wrap">
+          <button class="theme-btn" id="themeBtn" aria-label="Change theme">🌙</button>
+          <div class="theme-panel" id="themePanel">
+            <button class="theme-option active" data-theme="obsidian">🌙 Obsidian</button>
+            <button class="theme-option" data-theme="aurora">☀️ Aurora</button>
+            <button class="theme-option" data-theme="ice">❄️ Ice</button>
+          </div>
+        </div>
+        <button class="nav-toggle" id="navToggle" aria-label="Menu">☰</button>
+      </div>
+    </div>
+  </header>
+  <nav class="nav-mobile" id="navMobile" aria-label="Mobile">
+    <a href="index.html">Home</a>
+    <a href="websites.html">Websites</a>
+    <a href="build.html" class="active">Build</a>
+    <a href="learn.html">Learn</a>
+    <a href="plus.html">VEXDYN+</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+
+  <main class="build-main">
+    <!-- HERO + PATH CHOICE -->
+    <section class="section build-hero" id="buildHome">
+      <div class="build-hero-inner reveal">
+        <span class="section-label">VEXDYN BUILD</span>
+        <h1 class="build-hero-title">CREATE YOUR NEXT DIGITAL EXPERIENCE.</h1>
+        <p class="build-hero-sub">Whether you want VEXDYN to build it for you or you want to create it yourself, choose your path.</p>
+      </div>
+      <div class="build-path-grid reveal reveal-delay-1">
+        <button type="button" class="build-path-card path-for-me" id="pathBuildForMe" data-build-path="for-me">
+          <span class="build-path-icon" aria-hidden="true">
+            <svg viewBox="0 0 64 64" width="48" height="48"><path fill="currentColor" d="M36.2 8.4l4.4 4.4-18.6 18.6 6.6 6.6L47 19.4l4.4 4.4-3.2 3.2 6.2 6.2-4.4 4.4-6.2-6.2-3.2 3.2-22.8-22.8 4.4-4.4 3.2 3.2L36.2 8.4zM12 44.8c0-2.4 4.8-4.8 10.4-4.8s10.4 2.4 10.4 4.8S28 49.6 22.4 49.6 12 47.2 12 44.8z"/></svg>
+          </span>
+          <span class="build-path-title">BUILD FOR ME</span>
+          <span class="build-path-desc">You bring the idea.<br>VEXDYN builds the experience.</span>
+          <span class="build-path-cta">Begin →</span>
+        </button>
+        <button type="button" class="build-path-card path-yourself" id="pathBuildYourself" data-build-path="yourself">
+          <span class="build-path-icon" aria-hidden="true">
+            <svg viewBox="0 0 64 64" width="48" height="48"><path fill="currentColor" d="M44.8 8.8l10.4 10.4-6.4 6.4-4.8-4.8-16 16 4.8 4.8-6.4 6.4-10.4-10.4 6.4-6.4 4.8 4.8 16-16-4.8-4.8 6.4-6.4zm-28 28.8L8 46.4 17.6 56l8.8-8.8-9.6-9.6z"/></svg>
+          </span>
+          <span class="build-path-title">BUILD IT YOURSELF</span>
+          <span class="build-path-desc">Your idea. Your control.<br>Build with the future VEXDYN Builder.</span>
+          <span class="build-path-cta">Explore →</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- BUILD FOR ME: TYPE SELECTOR -->
+    <section class="section build-stage" id="buildTypeStage" hidden>
+      <button type="button" class="btn btn-secondary build-back" data-build-back="home">← Build Home</button>
+      <div class="build-stage-head">
+        <span class="section-label">BUILD FOR ME</span>
+        <h2 class="build-stage-title">Choose your experience</h2>
+        <p class="build-stage-sub">Select one or more website types. Cards move continuously — tap or click to select.</p>
+        <div class="build-selected-count" id="buildSelectedCount">0 EXPERIENCES SELECTED</div>
+      </div>
+      <div class="build-lanes" id="buildLanes" aria-label="Website categories">
+        <div class="build-lane build-lane-left" id="buildLaneLeft">
+          <div class="build-lane-track" id="laneTrackLeft"></div>
+        </div>
+        <div class="build-lane build-lane-right" id="buildLaneRight">
+          <div class="build-lane-track" id="laneTrackRight"></div>
+        </div>
+      </div>
+      <div class="build-stage-actions">
+        <button type="button" class="btn btn-primary" id="buildContinueTypes" disabled>CONTINUE →</button>
+      </div>
+    </section>
+
+    <!-- BUILD FOR ME: MULTI-STEP FORM -->
+    <section class="section build-stage" id="buildFormStage" hidden>
+      <button type="button" class="btn btn-secondary build-back" data-build-back="types">← Website Types</button>
+      <div class="build-form-layout">
+        <aside class="build-form-side">
+          <div class="build-progress-steps" id="buildSteps">
+            <button type="button" class="build-step is-active" data-step="1"><span>01</span> Project</button>
+            <button type="button" class="build-step" data-step="2"><span>02</span> Details</button>
+            <button type="button" class="build-step" data-step="3"><span>03</span> Vision</button>
+            <button type="button" class="build-step" data-step="4"><span>04</span> Requirements</button>
+            <button type="button" class="build-step" data-step="5"><span>05</span> Review</button>
+          </div>
+          <div class="build-summary-panel" id="buildSummaryPanel">
+            <div class="build-summary-label">YOUR PROJECT</div>
+            <div class="build-summary-types" id="buildSummaryTypes"></div>
+            <button type="button" class="btn btn-secondary btn-sm" data-build-back="types">Edit types</button>
+          </div>
+        </aside>
+        <div class="build-form-main">
+          <!-- Step 1 already selected types ack -->
+          <div class="build-step-panel is-active" data-panel="1">
+            <h3 class="build-panel-title"><span>01</span> PROJECT</h3>
+            <p class="build-panel-sub">Confirm your selected experiences, then continue.</p>
+            <div class="build-chip-list" id="buildStep1Types"></div>
+            <div class="build-nav-row">
+              <button type="button" class="btn btn-primary" data-build-next="2">CONTINUE →</button>
+            </div>
+          </div>
+          <div class="build-step-panel" data-panel="2" hidden>
+            <h3 class="build-panel-title"><span>02</span> PROJECT DETAILS</h3>
+            <p class="build-panel-sub">Let's understand what you're creating.</p>
+            <label class="build-field">
+              <span class="build-field-label">FULL NAME</span>
+              <input type="text" id="bfName" autocomplete="name" placeholder="Your name" />
+              <span class="build-field-error" data-err="name" hidden></span>
+            </label>
+            <label class="build-field">
+              <span class="build-field-label">BUSINESS / BRAND</span>
+              <input type="text" id="bfBrand" autocomplete="organization" placeholder="Who are we building for?" />
+              <span class="build-field-error" data-err="brand" hidden></span>
+            </label>
+            <label class="build-field">
+              <span class="build-field-label">EMAIL</span>
+              <input type="email" id="bfEmail" autocomplete="email" placeholder="Where can VEXDYN reach you?" />
+              <span class="build-field-error" data-err="email" hidden></span>
+            </label>
+            <label class="build-field">
+              <span class="build-field-label">WHATSAPP / PHONE</span>
+              <input type="tel" id="bfPhone" autocomplete="tel" placeholder="Optional, but recommended" />
+            </label>
+            <div class="build-nav-row">
+              <button type="button" class="btn btn-secondary" data-build-next="1">← BACK</button>
+              <button type="button" class="btn btn-primary" data-build-next="3">CONTINUE →</button>
+            </div>
+          </div>
+          <div class="build-step-panel" data-panel="3" hidden>
+            <h3 class="build-panel-title"><span>03</span> YOUR VISION</h3>
+            <p class="build-panel-sub">What do you want to create?</p>
+            <label class="build-field">
+              <span class="build-field-label">PROJECT VISION</span>
+              <textarea id="bfVision" rows="6" placeholder="Tell us about your business, your idea, the experience you want visitors to have…"></textarea>
+              <span class="build-field-error" data-err="vision" hidden></span>
+            </label>
+            <div class="build-field">
+              <span class="build-field-label">WHAT SHOULD IT FEEL LIKE?</span>
+              <div class="build-chip-select" id="bfStyles" data-multi="true"></div>
+            </div>
+            <label class="build-field">
+              <span class="build-field-label">REFERENCE / INSPIRATION</span>
+              <textarea id="bfRef" rows="3" placeholder="Have a website, brand, or visual direction you like?"></textarea>
+            </label>
+            <div class="build-nav-row">
+              <button type="button" class="btn btn-secondary" data-build-next="2">← BACK</button>
+              <button type="button" class="btn btn-primary" data-build-next="4">CONTINUE →</button>
+            </div>
+          </div>
+          <div class="build-step-panel" data-panel="4" hidden>
+            <h3 class="build-panel-title"><span>04</span> PROJECT REQUIREMENTS</h3>
+            <p class="build-panel-sub">What should your website do?</p>
+            <div class="build-chip-select" id="bfReqs" data-multi="true"></div>
+            <label class="build-field" id="bfOtherWrap" hidden>
+              <span class="build-field-label">TELL US WHAT YOU NEED</span>
+              <textarea id="bfOther" rows="3" placeholder="Custom requirements…"></textarea>
+            </label>
+            <div class="build-field">
+              <span class="build-field-label">WHAT STAGE ARE YOU AT?</span>
+              <div class="build-chip-select" id="bfStage" data-multi="false"></div>
+            </div>
+            <div class="build-field">
+              <span class="build-field-label">WHEN WOULD YOU LIKE TO START?</span>
+              <div class="build-chip-select" id="bfTimeline" data-multi="false"></div>
+            </div>
+            <div class="build-field">
+              <span class="build-field-label">PROJECT RANGE (OPTIONAL)</span>
+              <div class="build-chip-select" id="bfBudget" data-multi="false"></div>
+            </div>
+            <div class="build-nav-row">
+              <button type="button" class="btn btn-secondary" data-build-next="3">← BACK</button>
+              <button type="button" class="btn btn-primary" data-build-next="5">CONTINUE →</button>
+            </div>
+          </div>
+          <div class="build-step-panel" data-panel="5" hidden>
+            <h3 class="build-panel-title"><span>05</span> REVIEW YOUR PROJECT</h3>
+            <p class="build-panel-sub">Confirm everything looks right before transmitting.</p>
+            <div class="build-review" id="buildReview"></div>
+            <div class="build-nav-row">
+              <button type="button" class="btn btn-secondary" data-build-next="4">← BACK</button>
+              <button type="button" class="btn btn-primary" id="buildTransmit">TRANSMIT PROJECT →</button>
+            </div>
+          </div>
+          <div class="build-step-panel" data-panel="done" hidden>
+            <div class="build-confirm">
+              <div class="build-confirm-check">✓</div>
+              <h3 class="build-confirm-title">TRANSMISSION COMPLETE.</h3>
+              <p class="build-confirm-sub">Your project brief has been prepared.</p>
+              <p class="build-confirm-id">Project reference: <strong id="buildProjectId">VX-BUILD-0000</strong></p>
+              <p class="build-confirm-note">This is a local frontend reference. Backend transmission will be connected in a future VEXDYN version.</p>
+              <div class="build-nav-row">
+                <button type="button" class="btn btn-primary" id="buildRestart">START ANOTHER PROJECT</button>
+                <button type="button" class="btn btn-secondary" data-build-back="home">RETURN TO BUILD</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BUILD IT YOURSELF -->
+    <section class="section build-stage" id="buildYourselfStage" hidden>
+      <button type="button" class="btn btn-secondary build-back" data-build-back="home">← Build Home</button>
+      <div class="build-yourself reveal">
+        <span class="section-label">BUILD IT YOURSELF</span>
+        <h2 class="build-stage-title">YOUR IDEA. YOUR CONTROL.</h2>
+        <p class="build-stage-sub">Create websites and digital experiences with the future VEXDYN Builder.</p>
+        <div class="build-coming-soon">
+          <div class="build-coming-badge">VEXDYN BUILDER</div>
+          <h3>AI CREATION ENVIRONMENT</h3>
+          <p class="build-coming-status">COMING SOON</p>
+          <p>The AI-powered builder is not available yet. This space is reserved for the future VEXDYN creation system.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="vexdyn-logo-wordmark-alpha.png" alt="VEXDYN" class="logo-swap" height="32" />
+        <p>Technology, tools and knowledge for turning digital ideas into reality.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Platform</h4>
+        <a href="websites.html">Websites</a>
+        <a href="build.html">Build</a>
+        <a href="learn.html">Learn</a>
+        <a href="plus.html">VEXDYN+</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Founder</h4>
+        <div class="founder-card">
+          <span class="founder-name">David Augustine</span>
+          <span class="founder-title">Creator & Owner</span>
+          <span class="founder-contact">07025664141</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 VEXDYN. All rights reserved.</span>
+      <span>Build What's Next.</span>
+    </div>
+  </footer>
+  <script src="script.js"></script>
+  <script src="build.js"></script>
+</body>
+</html>
